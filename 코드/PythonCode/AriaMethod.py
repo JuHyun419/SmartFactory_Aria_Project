@@ -44,13 +44,13 @@ def Receive_s2f41():
 
 
 # PI -> Server  작업지시에 대한 응답
-def Send_s2f42(_SystemByte, _Hcack):
+def Send_s2f42(SystemByteResult, _Hcack):
     clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
     root = Element("SECS2_XML_MESSAGE")
 
     ## HEAD
     head = SubElement(root, "HEAD")
-    SubElement(head, "SystemByte").text = str(_SystemByte)
+    SubElement(head, "SystemByte").text = SystemByteResult
     SubElement(head, "CMD").text = "3"
     SubElement(head, "Stream").text = "2"
     SubElement(head,"Function").text = "42"
@@ -59,72 +59,157 @@ def Send_s2f42(_SystemByte, _Hcack):
     body = SubElement(root, "BODY")
     SubElement(body, "HCACK").text = str(_Hcack)
 
-    indent(root)    # indent() : XML 형식으로 보기 좋게 만들어주는 함수
-    dump(root)      # dump 함수는 인자로 넘어온 tag 이하를 print 해줌
-    clientSock.send((root.text).encode('utf-8'))    # Server로 데이터 전송
+    # XML 형식을 bytes로 변환
+    data = ET.tostring(root, encoding='utf-8', method='xml')
+
+    # indent(root)    # indent() : XML 형식으로 보기 좋게 만들어주는 함수
+    # dump(root)      # dump 함수는 인자로 넘어온 tag 이하를 print 해줌
+    clientSock.send(data)    # Server로 데이터 전송(bytes)
     print(root.text)
 
 
-# PI -> Server  Lot 작업 시작 전송
-def Send_s6f11_Lot(_SystemByte, _CEID, _LOTID):
+# -----------------------------------------------------------------
+# XML 형식
+#   <SECS2_XML_MESSAGE>
+#     <HEAD>
+#       <SystemByte> 00001 </SystemByte>
+#       <CMD> 3 </CMD>
+#       <Stream> 6 </Stream>
+#       <Function> 11 </Function>
+#     </HEAD>
+#     <BODY>
+#       <CEID> 1 </CEID> // Line_Env_Update
+#       <REPORTS>
+#         <REPORT>
+#           <REPORTID> 100 </REPORTID>
+#           <VARIABLES>
+#            <Product_number> 01, 02, 10, 20, ... </Product_number>
+#            <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
+#            <Model_temp> 15.5 </Model_temp>
+#	         <Model_humid> 40.6 </Model_humid>
+#	         <Color> "Blue" or "Red" <Color>
+#        	 <Fail_reason> reason </Fail_reason>
+#	         <QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
+#	         <C/V move state> 임의값 </C/V move state>
+#	         <Robot gripper state> 임의값 </Robot gripper state>
+#           </VARIABLES>
+#         </REPORT>
+#       </REPORTS>
+#     </BODY>
+#   </SECS2_XML_MESSAGE>
+# -----------------------------------------------------------------
+
+# PI -> Server  1개의 제품 생산 완료 전송(CEID = 1)
+def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp, Model_humid, Color, Fail_reason, QRCode):
      clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
      head = SubElement(root, "HEAD")
-     SubElement(head, "SystemByte").text = str(_SystemByte)
+     SubElement(head, "SystemByte").text = SystemByteResult
      SubElement(head, "CMD").text = "3"
      SubElement(head, "Stream").text = "6"
      SubElement(head,"Function").text = "11"
 
      ## BODY
      body = SubElement(root, "BODY")
-     SubElement(body, "CEID").text = str(_CEID)
+     SubElement(body, "CEID").text = "1"
      reports = SubElement(body, "REPORTS")
 
      ## REPORT
      report = SubElement(reports, "REPORT")
-     SubElement(body, "REPORTID").text = "200"
+     SubElement(report, "REPORTID").text = "100"
      variables = SubElement(report, "VARIABLES")
-     SubElement(variables, "LOT_ID").text = _LOTID
+     SubElement(variables, "Product_number").text = str(Product_number)
+     SubElement(variables, "Model_name").text = str(Model_name)
+     SubElement(variables, "Model_temp").text = str(Model_temp)
+     SubElement(variables, "Model_humid").text = str(Model_humid)
+     SubElement(variables, "Color").text = str(Color)
+     SubElement(variables, "Fail_reason").text = str(Fail_reason)
+     SubElement(variables, "QRCode").text = str(QRCode)
+     SubElement(variables, "C/V move state").text = "Start"
+     SubElement(variables, "Robot gripper state").text = "Start"
 
-     indent(root)    # indent() : XML 형식으로 보기 좋게 만들어주는 함수
-     dump(root)      # dump 함수는 인자로 넘어온 tag 이하를 print 해줌
-     clientSock.send((root.text).encode('utf-8'))    # Server로 데이터 전송
-     print(root.text)
+     # XML 형식을 bytes로 변환
+     data = ET.tostring(root, encoding='utf-8', method='xml')
+
+     #  str_data = str(data)   # 문자열로 변환
+     #  str_data2 = str_data.replace("b", "").replace("'", "") # 문자열 중 b' 제거
+
+     clientSock.send(data)    # Server로 데이터 전송
 
 
-# PI -> Server  1개의 제품 생산 완료 전송
-def Send_s6f11_Complete(_SystemByte, _CEID):
+# -----------------------------------------------------------------
+# XML 형식
+#   <SECS2_XML_MESSAGE>
+#     <HEAD>
+#       <SystemByte> 00002 </SystemByte>
+#       <CMD> 3 </CMD>
+#       <Stream> 6 </Stream>
+#       <Function> 11 </Function>
+#     </HEAD>
+#     <BODY>
+#       <CEID> 2 </CEID>
+#       <REPORTS>
+#         <REPORT>
+#           <REPORTID> 200 </REPORTID>
+#         </REPORT>
+#       </REPORTS>
+#     </BODY>
+#   </SECS2_XML_MESSAGE>
+# -----------------------------------------------------------------
+
+# PI -> Server  Lot 작업 시작 전송(CEID = 2)
+def Send_s6f11_Lot_Start(SystemByteResult):
      clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
      head = SubElement(root, "HEAD")
-     SubElement(head, "SystemByte").text = str(_SystemByte)
+     SubElement(head, "SystemByte").text = SystemByteResult
      SubElement(head, "CMD").text = "3"
      SubElement(head, "Stream").text = "6"
      SubElement(head,"Function").text = "11"
 
      ## BODY
      body = SubElement(root, "BODY")
-     SubElement(body, "CEID").text = str(_CEID)
+     SubElement(body, "CEID").text = "2"
      reports = SubElement(body, "REPORTS")
 
      ## REPORT
      report = SubElement(reports, "REPORT")
-     SubElement(body, "REPORTID").text = "100"
-     variables = SubElement(report, "VARIABLES")
-     SubElement(variables, "LOT_ID").text = "A"
-     SubElement(variables, "PRODUCTID").text = "A"
-     SubElement(variables, "STATE").text = "A"
-     SubElement(variables, "LOT_ID").text = "A"
-     SubElement(variables, "LOT_ID").text = "A"
-     SubElement(variables, "LOT_ID").text = "A"
+     SubElement(report, "REPORTID").text = "200"
 
-     clientSock.send((root.text).encode('utf-8'))    # Server로 데이터 전송
-     print(root.text)
-     
+     # XML 형식을 bytes로 변환
+     data = ET.tostring(root, encoding='utf-8', method='xml')
+     clientSock.send(data)    # Server로 데이터 전송
+
+
+# PI -> Server  Lot 명령에 대한 모든 제품을 생산 완료함(CEID = 3)
+def Send_s6f11_Lot_Complete(SystemByteResult):
+     clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
+     root = Element("SECS2_XML_MESSAGE")
+
+     ## HEAD
+     head = SubElement(root, "HEAD")
+     SubElement(head, "SystemByte").text = SystemByteResult
+     SubElement(head, "CMD").text = "3"
+     SubElement(head, "Stream").text = "6"
+     SubElement(head,"Function").text = "11"
+
+     ## BODY
+     body = SubElement(root, "BODY")
+     SubElement(body, "CEID").text = "3"
+     reports = SubElement(body, "REPORTS")
+
+     ## REPORT
+     report = SubElement(reports, "REPORT")
+     SubElement(report, "REPORTID").text = "300"
+
+     # XML 형식을 bytes로 변환
+     data = ET.tostring(root, encoding='utf-8', method='xml')
+     clientSock.send(data)    # Server로 데이터 전송
+
 
 # -----------------------------------------------------------------
 # XML 형식
@@ -150,33 +235,31 @@ def Send_s6f11_Complete(_SystemByte, _CEID):
 #   </SECS2_XML_MESSAGE>
 # -----------------------------------------------------------------
 
-## PI -> Server  라인 환경 정보 업데이트(온습도)
-def Send_s6f11_TempHumid(_SystemByte, _CEID, _Temp, _Humid):
-     clientSock = connToServer("220.69.249.231", 8099) # 서버에 접속
+## PI -> Server  라인 환경 정보 업데이트(온습도, CEID = 4)
+def Send_s6f11_TempHumid(SystemByteResult, Temp, Humid):
+     #clientSock = connToServer("220.69.249.231", 8099) # 서버에 접속
+     clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
      head = SubElement(root, "HEAD")
-     SubElement(head, "SystemByte").text = str(_SystemByte)
+     SubElement(head, "SystemByte").text = SystemByteResult
      SubElement(head, "CMD").text = "3"
      SubElement(head, "Stream").text = "6"
      SubElement(head,"Function").text = "11"
 
      ## BODY
      body = SubElement(root, "BODY")
-     SubElement(body, "CEID").text = str(_CEID)     # CEID
+     SubElement(body, "CEID").text = "4" 
      reports = SubElement(body, "REPORTS")
 
      ## REPORT
      report = SubElement(reports, "REPORT")
      SubElement(report, "REPORTID").text = "400"    # REPORTID
      variables = SubElement(report, "VARIABLES")
-     SubElement(variables, "TEMP").text = str(_Temp)    # TEMP
-     SubElement(variables, "HUMID").text = str(_Humid)  # HUMID
+     SubElement(variables, "Temp").text = str(Temp)    # TEMP
+     SubElement(variables, "Humid").text = str(Humid)  # HUMID
 
      #indent(root)
      data = ET.tostring(root, encoding='utf-8', method='xml')
-     clientSock.send(str(data).encode('utf-8'))    # Server로 데이터 전송
-
-Send_s6f11_TempHumid(1, 4, 25, 50)
-    
+     clientSock.send(data)    # Server로 데이터 전송

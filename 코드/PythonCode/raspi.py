@@ -1,15 +1,46 @@
 import serial   # 아두이노 통신 라이브러리
 from time import *  
 from multiprocessing import Queue, Process
-from import_detect import *
-import Adafruit_DHT     # 온습도 관련 라이브러리
+from import_detect import * # import_detect.py 파일 불러옴
+import Adafruit_DHT         # 온습도 관련 라이브러리
+from AriaMethod import *    # AriaMethod.py 파일 불러옴
+
 
 BAUDRATE = 9600
 time_flag = 0
 last_time = 0
 
+# SystemBytePlus() 함수에서 사용될 문자열, 리스트
+SystemByteResult = ""
+SystemByte = [0, 0, 0, 0, 0]
+
+
 sensor = Adafruit_DHT.DHT11
 pin = '4'
+
+
+# 00001 부터 1씩 증가하는 함수
+def SystemBytePlus():
+    SystemByte[4] +=1   # 일의자리 1씩 증가
+    if(SystemByte[4] == 10):    # 일의자리가 10이 됬을때
+        SystemByte[3] += 1      # 십의자리 +1
+        SystemByte[4] = 0       # 일의자리 초기화
+    
+    if(SystemByte[3] == 10):    # 십의자리가 10이 됬을때
+        SystemByte[2] += 1      # 백의자리 +1
+        SystemByte[3] = 0       # 십의자리 초기화
+    
+    if(SystemByte[2] == 10):    # 백의자리가 10이 됬을때
+        SystemByte[1] += 1      # 천의자리 +1
+        SystemByte[2] = 0       # 백의자리 초기화
+
+    if(SystemByte[1] == 10):    # 천의자리가 10이 됬을때
+        SystemByte[0] += 1      # 만의자리 +1
+        SystemByte[1] = 0       # 천의자리 초기화
+    
+    # 문자열 합치기
+    SystemByteResult = str(SystemByte[0]) + str(SystemByte[1]) + str(SystemByte[2]) + str(SystemByte[3]) + str(SystemByte[4])
+    return SystemByteResult
 
 # 온, 습도 리턴 함수
 def humanity_temp():
@@ -47,6 +78,8 @@ def receive_arduino(ser, q):
         data = str(data[:-1].decode())  
         q.put(data)
 
+
+
 # 온습도 출력
 def get_H_T():
     
@@ -58,10 +91,12 @@ def get_H_T():
         time_flag = 1
     
     # 10초 간격 온습도 출력
-    if time() - last_time >= 10:
+    if time() - last_time >= 3:
         temp, hum = humanity_temp()
         time_flag = 0
         print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
+        SystemByteResult = SystemBytePlus()
+        Send_s6f11_TempHumid(SystemByteResult, temp, hum)
    
 #def image_process(cap, ser, q, state_flag = 1):
     
@@ -114,6 +149,7 @@ def serve_process(ser, q):
         
 try:
     if __name__ == "__main__":
+        SystemByte = [0, 0, 0, 0, 0]
         print("start \n")
         q = Queue()
         ser = serial_open()
@@ -126,3 +162,4 @@ except KeyboardInterrupt:
     print("exit() \n")
     p1.join()
     p2.join()
+

@@ -13,6 +13,8 @@ qr코드
 
 string temp string humid
 
+
+
 {{제품고유번호,모델이름,모델온도,모델습도}}
 
 {{product_number,model_name,model_temp,model_humid}}
@@ -43,9 +45,9 @@ string temp string humid
 	<Model_humid> 40.6 </Model_humid>
 	<Color> "Blue" or "Red" <Color>
 	<Fail_reason> reason </Fail_reason>
-	<Barcode> {{product_number,model_name,model_temp,model_humid}} </Barcode>
-	<C/V move state> 임의값 </C/V move state>
-	<Robot gripper state> 임의값 </Robot gripper state>
+	<QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
+	<CV_move_state> 임의값 </CV_move_state>
+	<Robot_gripper_state> 임의값 </Robot_gripper_state>
           </VARIABLES>
         </REPORT>
       </REPORTS>

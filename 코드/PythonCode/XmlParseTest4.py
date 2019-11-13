@@ -82,24 +82,12 @@ print('---------------------------------')
 print(data)
 print(type(data))
 str_data = str(data)
-
+print(type(str_data))
 
 
 str_data2 = str_data.replace("b", "").replace("'", "")
 print(str_data2)
 
-tree = ET.fromstring(str_data2)
-indent(tree)
-dump(tree)
 
 
 
-#recv_data = 
-#print(recv_data)
-
-
-# tree = ET.fromstring(xmlStr)     
-# indent(tree)
-# dump(tree)               
-
-#tree = ET.fromstring(str_data.encode("utf-8"))
