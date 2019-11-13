@@ -1,0 +1,62 @@
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\winform real server.exe.config
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\winform real server.exe
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\winform real server.pdb
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform real server.csprojAssemblyReference.cache
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform_real_server.Form1.resources
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform_real_server.Properties.Resources.resources
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform real server.csproj.GenerateResource.cache
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform real server.exe
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform real server.pdb
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\MySql.Data.dll
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\Google.Protobuf.dll
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\Renci.SshNet.dll
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\bin\Debug\MySql.Data.xml
+C:\Users\User\source\repos\ANU-ARIA\aria_server\winform real server\winform real server\obj\Debug\winform real server.csproj.CopyComplete
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\winform real server.exe.config
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\winform real server.exe
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\winform real server.pdb
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\MySql.Data.dll
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\Google.Protobuf.dll
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\Renci.SshNet.dll
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\User\Desktop\winform real server\winform real server\bin\Debug\MySql.Data.xml
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.csprojAssemblyReference.cache
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform_real_server.Form1.resources
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform_real_server.Properties.Resources.resources
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.csproj.GenerateResource.cache
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.csproj.CopyComplete
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.exe
+C:\Users\User\Desktop\winform real server\winform real server\obj\Debug\winform real server.pdb
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\winform real server.exe.config
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\winform real server.exe
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\winform real server.pdb
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\MySql.Data.dll
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\Google.Protobuf.dll
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\Renci.SshNet.dll
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\bin\Debug\MySql.Data.xml
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform real server.csprojAssemblyReference.cache
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform_real_server.Form1.resources
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform_real_server.Properties.Resources.resources
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform real server.csproj.GenerateResource.cache
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform real server.csproj.CopyComplete
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform real server.exe
+C:\Users\User\Desktop\1010 서버 클라이언트\winform real server (2)\winform real server\obj\Debug\winform real server.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\winform real server.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\winform real server.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\winform real server.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\MySql.Data.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\Google.Protobuf.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\Renci.SshNet.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\bin\Debug\MySql.Data.xml
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform_real_server.Form1.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform_real_server.Properties.Resources.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.csproj.GenerateResource.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.csproj.CopyComplete
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\서버\winform real server\obj\Debug\winform real server.pdb

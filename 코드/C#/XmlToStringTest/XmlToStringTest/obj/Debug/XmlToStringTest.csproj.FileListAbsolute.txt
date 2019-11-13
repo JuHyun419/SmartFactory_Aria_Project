@@ -1,0 +1,10 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\bin\Debug\XmlToStringTest.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\bin\Debug\XmlToStringTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\bin\Debug\XmlToStringTest.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.Form1.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.Properties.Resources.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlToStringTest\XmlToStringTest\obj\Debug\XmlToStringTest.pdb

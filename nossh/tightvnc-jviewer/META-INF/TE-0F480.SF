@@ -1,0 +1,703 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest-Main-Attributes: v9k/axLKPpijtacRsquWBa45JgXLx
+ n3euFifTtv8tHw=
+SHA-256-Digest-Manifest: z87KtpUJlR7UbRTRz75pBY6wfyeyEwQ0XTGhEYB4MoI=
+Created-By: 1.8.0_66 (Oracle Corporation)
+
+Name: com/glavsoft/viewer/swing/Surface$1.class
+SHA-256-Digest: P1x+w2afmSlShWAVIAohbBldBBn7bcxjaux8TtbHRZc=
+
+Name: com/glavsoft/viewer/images/tightvnc-logo-128x128.png
+SHA-256-Digest: sbdcq7SZPn+v7W6H82i8wAbI3Z5bQgsCPCtJlzkACX4=
+
+Name: com/glavsoft/viewer/swing/SwingConnectionWorkerFactory.class
+SHA-256-Digest: GPqa6rOz4t3R28sN24p1P8zZh3MSQkIZl9+zD9yuiiM=
+
+Name: com/glavsoft/viewer/swing/Surface.class
+SHA-256-Digest: WKY6IX+UJwSg/W8vDQqJ5/CBsS/cOzx9Nj8G/xs1rIs=
+
+Name: com/glavsoft/viewer/swing/mac/MacApplicationWrapper.class
+SHA-256-Digest: 47Y7bQ1hb3ZWssmGrF2nq2OwTvDcFiP6VA+PzYGi4h0=
+
+Name: com/glavsoft/rfb/protocol/ProtocolContext.class
+SHA-256-Digest: 80QHj15ZM2pwPLv4EtUOZaAvbHj4/y/wGMcNkV1kjFA=
+
+Name: com/glavsoft/rfb/protocol/auth/AuthHandler.class
+SHA-256-Digest: 91U3sAZDZl2DJSPExLBzYGDQTOcCJDLPerXQe9p+X1g=
+
+Name: com/glavsoft/viewer/swing/ConnectionPresenter.class
+SHA-256-Digest: 2zzsDI1/swAxVYEXq4IlMBBXGBTH1HeFjsh2KcpneSM=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$6.class
+SHA-256-Digest: Y0CE0RstqSK3UmFCNlikZrtWKhKZclkTf0L2zcr1Foc=
+
+Name: com/glavsoft/viewer/images/button-win.png
+SHA-256-Digest: GZs3/+ndWVB1GElH8Hf53mDnDwfJ/YcgDoO7zWJ3x4Y=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$6.class
+SHA-256-Digest: 1bo6nfCzYNs0WTBQai4QthEESnz0GSM9YUBEIP5q1a0=
+
+Name: com/glavsoft/viewer/swing/ssh/TrileadSsh2ConnectionManager.class
+SHA-256-Digest: 2csuMmaSwWCsvdNGxY9YHvpXFoIUu0OB9ZL5q6IvS/U=
+
+Name: com/glavsoft/exceptions/UnsupportedSecurityTypeException.class
+SHA-256-Digest: qqRZC/zyg40ANjtMlHztmY8M1nnYUbPL1+d+BJwCVk8=
+
+Name: com/glavsoft/viewer/Viewer$1.class
+SHA-256-Digest: v4Cp78fLQFazBz5b3wo5TQv4INHzEi/A/HgwBfTZnso=
+
+Name: com/glavsoft/viewer/swing/mac/MacApplicationWrapper$2.class
+SHA-256-Digest: 0u3QLw+Q0sioX41szEW3kI5NtWSsEWO4OFb4+sQVQY8=
+
+Name: com/glavsoft/viewer/workers/NetworkConnectionWorker.class
+SHA-256-Digest: tbjkbpA88aOB77J8LlXzv6E40r9UacA531ManOPSJR8=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionInfoView$1.class
+SHA-256-Digest: 6BexjX3s/9E2PDQGec4aq5o8cfxMEVsaFlEJsWawk/Y=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread$4.class
+SHA-256-Digest: p5moM0wUaqPDom9zOvQ5X+vNnC2w5mjyq0ABdZWoxvw=
+
+Name: com/glavsoft/viewer/swing/gui/StatusBar.class
+SHA-256-Digest: l2tih5aQCNak8ItUwpBuUQb28hMU34u0dI2OmkRgZ0c=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$9.class
+SHA-256-Digest: /nM/nqPfOMaO0GomISqnsMKZFMDFp8YfzH69EWWAvpA=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindowFactory.class
+SHA-256-Digest: Ar5VQVDZEr0J2osatRpH8E/aHYhplkICXT9amTx1Da8=
+
+Name: com/glavsoft/rfb/client/ClientCutTextMessage.class
+SHA-256-Digest: IfTUo5gnyg5QriL31sksHCxXr8+yufNw7Ycbq8NNNwo=
+
+Name: com/glavsoft/viewer/swing/KeyboardConvertor$CodePair.class
+SHA-256-Digest: lib6ac9UF6lgAGzXcGxi5xltdemr1GHpqFrMoRT9NXE=
+
+Name: com/glavsoft/viewer/ParametersHandler$1.class
+SHA-256-Digest: TnNa/F4T8RWHSY4QocX8d0KpzbYVsH/+WlBwocft2ts=
+
+Name: com/glavsoft/rfb/IRepaintController.class
+SHA-256-Digest: M5lBA7FWTeX4ULdP+V9svuimrQfv6QkI7qYUBW5JMCQ=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$RadioButtonSelectedS
+ tate.class
+SHA-256-Digest: gjalqjqdQE6315eDvMicMvXpIetgm4IboOBSA7aobEU=
+
+Name: com/glavsoft/transport/BaudrateMeter.class
+SHA-256-Digest: lzdIaK3/sfwcE3JWi4YjPC1tEl3ZX+mOczCETPg54WY=
+
+Name: com/glavsoft/viewer/swing/KeyboardConvertor$1.class
+SHA-256-Digest: AgAPYmnLCk34dVMmPfbe3bM3NIQK5PnSt7TLTowJZK4=
+
+Name: com/glavsoft/rfb/protocol/Protocol$1.class
+SHA-256-Digest: Bh3702PrltHlW5r4SGguk/dH8nsf7CU8VFmBruVNbsk=
+
+Name: com/glavsoft/exceptions/TransportException.class
+SHA-256-Digest: hgOkhdktu6c08e9D1/Y/Vw5s1ualiXbGmLlHiAzWO1o=
+
+Name: com/glavsoft/rfb/protocol/auth/TightAuthentication.class
+SHA-256-Digest: doz04okk6p1DVYtyZ+a7+5qRgpKYqOQjwvRx3PKhsso=
+
+Name: com/glavsoft/viewer/Viewer.class
+SHA-256-Digest: hTRUEwmbJFYsDTtFlGwyNFcCZJ5g997D7ZMsMZ2d6GI=
+
+Name: com/glavsoft/rfb/protocol/auth/VncAuthentication.class
+SHA-256-Digest: 6APfS0uIy7zYnZPoPOtc/9mcTJFUDYed+Fdq2lBACAA=
+
+Name: com/glavsoft/viewer/settings/LocalMouseCursorShape.class
+SHA-256-Digest: RRXiBC3hSLi486DyebpFs/0QnqMJQbIYQWYjClWRKVI=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$1.class
+SHA-256-Digest: cm7MrW1bq/viTZxLYin8BLWn2Eu0dfX7HNvcEcnAwHc=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread$2$1.class
+SHA-256-Digest: +ALeIPdghioGax5cwK4cv4nqMC/e3VRGKZ1sHVuig+U=
+
+Name: com/glavsoft/viewer/swing/SwingNetworkConnectionWorker.class
+SHA-256-Digest: wGlaFuOm9Ygc+JKtH8mSPL46kVAUrA7OMgfhAuXf/Q0=
+
+Name: com/glavsoft/viewer/images/button-alt.png
+SHA-256-Digest: /ZtBwxAGcpmfyRrGpdvRLqSdchDRIicgvFP/5D9eM34=
+
+Name: com/glavsoft/viewer/settings/ConnectionParams.class
+SHA-256-Digest: biYiqc2Ltq3YrZOITl9HT4MfVeTkqLFK9upe7mE4Qpk=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$3.class
+SHA-256-Digest: a2/wzG8qMSn3nbcLFT83bpj9vex6vIPN4gg/lY4Xo5A=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$1.class
+SHA-256-Digest: bbV2caUjNGxIn7cNTlc4Ydd9mSzUOD3heqLjvDC+6CI=
+
+Name: com/glavsoft/rfb/RfbCapabilityInfo.class
+SHA-256-Digest: 4dse0qbN/w87vHXMjH7iopRf0KyZxYElaOrgh6MQbJs=
+
+Name: com/glavsoft/rfb/protocol/tunnel/SslTunnel$1.class
+SHA-256-Digest: 6gpsFPhRIPOWVWKbDJE4sk8l+3TKMONV+iZTDjKmbu0=
+
+Name: com/glavsoft/exceptions/FatalException.class
+SHA-256-Digest: WCvnRPNmDM8Xv5Prx0sd7QJQKzeFfMT1mh5U+ENuXKI=
+
+Name: com/glavsoft/viewer/ParametersHandler.class
+SHA-256-Digest: U0M8bYNn1nWEkDu24N/LiEA9/x3n5JPgasgeD0bfrQ4=
+
+Name: com/glavsoft/viewer/ParametersHandler$2.class
+SHA-256-Digest: VSnDE1KapGIAOXXsz6gRSROgink6PeOm7dcePJzDIh4=
+
+Name: com/glavsoft/rfb/client/ClientMessageType.class
+SHA-256-Digest: Rn1RstovOs2k7ItCmFZtOiDIJz+Ip5jNddaYKnKYx4E=
+
+Name: com/glavsoft/rfb/encoding/ServerInitMessage.class
+SHA-256-Digest: wN+Xxv7d/49QD6T5OSCzFY7DMZdqqIvOQOHgrpiR5Nk=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionInfoView$2.class
+SHA-256-Digest: FKC742ypsc2jRAL1KU8CnWs/U2dNMr/v2AvxKnGkra0=
+
+Name: com/glavsoft/exceptions/CryptoException.class
+SHA-256-Digest: AFvivxM1oFFM6Cv7BEVUKUUIPMlo3QR9+YVQRLhOH0g=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$4.class
+SHA-256-Digest: dqmm0QPwi+Z1rIH5jYSte9g4vRoXb9HV1lAd/fQHFh0=
+
+Name: com/glavsoft/viewer/settings/UiSettingsData.class
+SHA-256-Digest: kq9h8CcsaLzYG036kd2dqMkf7OnB60+R+oWuXUk1biM=
+
+Name: com/glavsoft/utils/Keymap.class
+SHA-256-Digest: 3QV+5W3ODovlwu5YSCMXbMJzZepMdOkd23v3FmzkASY=
+
+Name: com/glavsoft/viewer/Viewer$2.class
+SHA-256-Digest: BrJQ7K0boVrzN9V2v+IkKi8QnZXErlkPoF/55Yh67/Y=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$7.class
+SHA-256-Digest: E9uqlgPJKFIuN5DmeQoQxyhgcKrPpz7IP+/MpqjhUi8=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$7.class
+SHA-256-Digest: t6vAdJYzsnhtNGnX05vb0bZXbosgPfVFMnhyLhrh5m0=
+
+Name: com/glavsoft/viewer/swing/mac/MacApplicationWrapper$3.class
+SHA-256-Digest: fgNIvp9A7HaU/b38WqS/0JOaIf7Jhx4aJa20IpQU68Q=
+
+Name: com/glavsoft/rfb/protocol/handlers/Handshaker$ProtocolVersion.cl
+ ass
+SHA-256-Digest: JaqanizDKuuyyeXi/8rJHKQloq6P9zBnUCejq0mCEg4=
+
+Name: com/glavsoft/rfb/client/SetPixelFormatMessage.class
+SHA-256-Digest: BuXJCbD7q9dtZeI5fvOuLVi3Jbxj2UlkB2g+mlM8fes=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionsHistory.class
+SHA-256-Digest: iWu/tulMpUWXsPtUd71kpVZwQ6xuN0Cau1iCq8yNso0=
+
+Name: com/glavsoft/viewer/swing/ViewerEventsListener.class
+SHA-256-Digest: 0AvdiTeiq0NcIPlYf4FSEHpwI4dXEGJF/kVc8LwqtTg=
+
+Name: com/glavsoft/viewer/images/button-zoom-out.png
+SHA-256-Digest: pNsJb3RcWETDv9SQSdM8LGdSCb5aHb5pc1T5B3VGWso=
+
+Name: com/glavsoft/viewer/mvp/PropertyNotFoundException.class
+SHA-256-Digest: WuzpklMFFSZGfXYgV4I+4eByWRe/nyptd6Z6G6e0mcM=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$5.class
+SHA-256-Digest: aWs2wTaEjCG5eQAY6U934EYOdxEqIV1PlqOHGsRaCig=
+
+Name: com/glavsoft/viewer/images/button-ctrl.png
+SHA-256-Digest: DitcUxe/p0z0quBguIRdc+2+J011DOPc8J5vW+kG1LI=
+
+Name: com/glavsoft/viewer/Viewer$ApplicationSettings.class
+SHA-256-Digest: AKT+qXydnB9cwwAqlNrQ4Ks5hGouOOwew2QmIBO3S6M=
+
+Name: com/glavsoft/viewer/swing/mac/MacApplicationWrapper$4.class
+SHA-256-Digest: ewPYJ75cK+lYqnoD+McBJVPWO2GuVKpeHSx/m/VbDNw=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$8.class
+SHA-256-Digest: EaCx3uwZ8YXSus2pwiwzX28IzKidqEL0Tvk7cE6HDbA=
+
+Name: com/glavsoft/viewer/Viewer$AppletSettings.class
+SHA-256-Digest: /h91rHwYCa5xy+x+fhaxNrHvHR504R1aenvvcsodXhE=
+
+Name: com/glavsoft/viewer/swing/Utils.class
+SHA-256-Digest: 2BCbWZgYLTLZRC35naDINWOPE3fJoTBtN4GH2VG5vVE=
+
+Name: com/glavsoft/viewer/swing/gui/RequestSomethingDialog.class
+SHA-256-Digest: jKvBs6XekAH04ztwlVoY521scML6DLr5uB4fnMQb5+8=
+
+Name: com/glavsoft/rfb/protocol/handlers/Handshaker.class
+SHA-256-Digest: Xk9FJEt9gfRZgod4xVWBk4utFT5ttsMCzmeWcb5OfKA=
+
+Name: com/glavsoft/viewer/images/button-close.png
+SHA-256-Digest: cEaLA5ZJZI6h20ghe6032DjGlZcgPPXVj6mfwjE8nS0=
+
+Name: com/glavsoft/rfb/protocol/MessageQueue.class
+SHA-256-Digest: 0A4CDwCGRjIiadzdqIK0baC0LMH/X8NqJAu4jjwZnGk=
+
+Name: com/glavsoft/drawing/Renderer.class
+SHA-256-Digest: 9ZPWH8sm3IHtl9hFTkY+v0jrq2wueAOeGiccVFe1OXo=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$2.class
+SHA-256-Digest: AeEkPl6B2hdTmWDIG2Ke/3De/qPwCj4RN5ZEYHOFsvs=
+
+Name: com/glavsoft/rfb/encoding/decoder/TightDecoder.class
+SHA-256-Digest: ykRmyDECQZtJUGXEtSM4MXTWGDBUbYpsQulMTN6EUDI=
+
+Name: com/glavsoft/viewer/swing/ssh/TrileadSsh2ConnectionManager$Inter
+ activeInputCallback.class
+SHA-256-Digest: 9EUv4a9mtr6tiuydf30OHflwNUzYfjKUL91ePfCjY6E=
+
+Name: com/glavsoft/rfb/encoding/EncodingType.class
+SHA-256-Digest: 2wj/n02ndcWTp2GhLh7adPc9RscaXRGoENSJvFlnNpU=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$5.class
+SHA-256-Digest: ezGCmoCgzzjs+FXLOPqft3HmJ9If2BIZWxVKkcz7i+w=
+
+Name: com/glavsoft/viewer/swing/RendererImpl.class
+SHA-256-Digest: 5oSVPQ/JGVMWJEsYW3et5AX9Cr/CUDXVTzLVpDN3gzM=
+
+Name: com/glavsoft/viewer/workers/ConnectionWorker.class
+SHA-256-Digest: H58maArGu74G4w7vzGkMkj1YpxNj5KlqAlCYi6vZBKg=
+
+Name: com/glavsoft/rfb/client/PointerEventMessage.class
+SHA-256-Digest: NSOe76BtrbdslevaQPCJs05AveoPgWP+vVQgOscBJAc=
+
+Name: com/glavsoft/rfb/encoding/decoder/ZlibDecoder.class
+SHA-256-Digest: LRgo5ZanqfH1uLm6GGMSAF64b23MXNLIpDIc2841WVA=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$6.class
+SHA-256-Digest: Bblas6soVGwL6pHz9JIrLaVmCnwQXS4FCBXxwnjH7Kg=
+
+Name: com/glavsoft/rfb/protocol/tunnel/SslTunnel.class
+SHA-256-Digest: RcLuKC+yLf3bijOrE/YjHGuwWnC19khF1Sb8+t3MrDw=
+
+Name: com/glavsoft/exceptions/ClosedConnectionException.class
+SHA-256-Digest: udbjTmGZrOR0CoMnQ7X38ryXp1Qbh83NRGBHFgREkFA=
+
+Name: com/glavsoft/rfb/encoding/decoder/ByteBuffer.class
+SHA-256-Digest: /YgGfANjCXMPXn4DLwNld0RkE+fQMxlDxncizxD3jJk=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$ColorDepthSelectItem
+ .class
+SHA-256-Digest: 4bk9dtYx5uYYAUvzDfJWi7Gyji6Yix47UxSh+EJB1UQ=
+
+Name: com/glavsoft/drawing/SoftCursor.class
+SHA-256-Digest: jW+IOIt0XS0tJXoI51VmqOD7IDm0T9ozXgqXs/haF64=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread$3.class
+SHA-256-Digest: s3swy6TVrtv6alTH9TW7D/WNBjlVejZLfTaYE/Kd6kw=
+
+Name: com/glavsoft/drawing/ColorDecoder.class
+SHA-256-Digest: PBPTzCncL91KW0lSurk8UpiNdGCbzXsvykz2Ysk3f4U=
+
+Name: com/glavsoft/rfb/protocol/ProtocolSettings.class
+SHA-256-Digest: sJV4QBI8NH1/Gd0K6ichzF0tB7ZQO3m7W1quGyn0bJY=
+
+Name: com/glavsoft/viewer/swing/gui/RequestSomethingDialog$1.class
+SHA-256-Digest: F/FscUU67S8QPbqGV6XAHJWnxzA5xlbR8bi4v3UTTyU=
+
+Name: com/glavsoft/exceptions/ProtocolException.class
+SHA-256-Digest: LstMBqG/mY1n0P9hNBFXqeryYe4YWGJrfCo60/SsQUI=
+
+Name: com/glavsoft/viewer/settings/WrongParameterException.class
+SHA-256-Digest: 9iRdXFcCpBKRHknZQjgTbyJjZJwUt0El0RE3IULExdk=
+
+Name: com/glavsoft/rfb/encoding/PixelFormat.class
+SHA-256-Digest: rj2QeXSQx5Mn6WT0YZZKErCKS3N+ljVEkmIby9guVd8=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$7.class
+SHA-256-Digest: wuwDFLXnPlUWkMmhYbDlT5wWK78R88jR8avKiiBQYzY=
+
+Name: com/glavsoft/viewer/images/button-zoom-100.png
+SHA-256-Digest: coxqeAifdSyfe9zyc8PZ5yX3eeGxZQWIt2G6rUCXGqw=
+
+Name: com/glavsoft/rfb/client/FramebufferUpdateRequestMessage.class
+SHA-256-Digest: U3rtsANnmUMj0OfNVhGnpp9k1nDCVgl/H9XXBD9N4Ak=
+
+Name: com/glavsoft/rfb/encoding/decoder/RichCursorDecoder.class
+SHA-256-Digest: gS3Bi+U11bp7zmQXNJw7lokMrbXv+q84dBSjLcyYiNk=
+
+Name: com/glavsoft/viewer/swing/Utils$1.class
+SHA-256-Digest: 86EoUeHnvsDyGy9h5/7SiBQwPHeBayRhSIJ1ya+SLJ8=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionInfoView.class
+SHA-256-Digest: p9uDfkJZwoBN0vrBkGpARyeIUjkMJYXfZYpkqv050Z0=
+
+Name: com/glavsoft/viewer/images/button-zoom-fullscreen.png
+SHA-256-Digest: u7ERDAEPBKmvcj0k/q7ozfvX34DiLfqmBjX3g5a3BbU=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$4.class
+SHA-256-Digest: hlvCuO3PLqM0rsBRwWCnwMEgA8gQZODL4W+4IMNmwXw=
+
+Name: com/glavsoft/rfb/encoding/decoder/CopyRectDecoder.class
+SHA-256-Digest: WbhdzkNjF9sSgFYfI1KU7Zi5dLcWslqJVFbFD1jAQMY=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread$2.class
+SHA-256-Digest: DSvftmr+ibQMKoYOBWksx+4zgI+8ZcrcumM3oE8pNIE=
+
+Name: com/glavsoft/viewer/Viewer$2$1.class
+SHA-256-Digest: cHEVY4+qmCJeQYaN6pOtnWkG1opMpq1VU33i2VVQgOE=
+
+Name: com/glavsoft/rfb/protocol/ReceiverTask.class
+SHA-256-Digest: YJDgqUumC1ud/ETMH06ifsjjNffIio2k/LbIV0IYcPw=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$1.class
+SHA-256-Digest: toyMPmW5bMnzq+1ubl8YOTZ0U+J6rY1ttSZ/5ZxQYFs=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread$1.class
+SHA-256-Digest: uYganEEwMo+LblgCp1BOSzfCyUcYwy9WNrVsaHSeAhg=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$10.class
+SHA-256-Digest: AIhWD/hC+8MQ/5ezp69HxPSUZeZfyBEkR7oxlgGxZoI=
+
+Name: com/glavsoft/rfb/IChangeSettingsListener.class
+SHA-256-Digest: 0X7RRGpfXQoVeIhvy00sp7stV3FCUX7WvWQi3uxe1XU=
+
+Name: com/glavsoft/rfb/protocol/Protocol.class
+SHA-256-Digest: inuZF0IsGucubFnxHhJDAKBbtw/tU11WLOW8CEhIHl4=
+
+Name: com/glavsoft/viewer/settings/UiSettings.class
+SHA-256-Digest: 7O7J5wtOSDWKK9k22TVkHSgoU1Rl+wKxUz+VikGz3SA=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$3.class
+SHA-256-Digest: zeDcDvLlSQ0PPdVqxugA8Vx8qaErK4zZbnDwG2vwpfc=
+
+Name: com/glavsoft/rfb/encoding/decoder/FramebufferUpdateRectangle.cla
+ ss
+SHA-256-Digest: YTW/jtSdyKfBFLVOCKbFF7toH4zncVfw5BeMbYKZt/U=
+
+Name: com/glavsoft/rfb/encoding/decoder/ZRLEDecoder.class
+SHA-256-Digest: tqFgXhctGjuiqb76PBx1gz1smSa1mtEQ/ULq6eCdH+s=
+
+Name: com/glavsoft/viewer/images/cursor-dot.png
+SHA-256-Digest: e/ZXtxHKP3Wb+7b0a4NL6VbVVTtUJIzGtNbvs4TERRE=
+
+Name: com/glavsoft/viewer/swing/SwingRfbConnectionWorker$ConnectionIdC
+ hooser.class
+SHA-256-Digest: D0Y2/HJzMARIvOND9AYmy/nscP5dhSFGtAHBMd7aAAU=
+
+Name: com/glavsoft/viewer/images/button-save.png
+SHA-256-Digest: khcJkc0wjP9ZRs+OXphEMrBVcZXYU9pRgDBA9xTGwBM=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$3.class
+SHA-256-Digest: CtsckizlNBfxBaEJphwom00WwQMVdjxs5ZiF9SgxQZs=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$FullscreenBorderDete
+ ctionThread.class
+SHA-256-Digest: dDi9uJdpLzB1qUADU66ZWPkUdLP1BWPYUeJGiZHIJZY=
+
+Name: com/glavsoft/viewer/swing/MouseEventListener.class
+SHA-256-Digest: EB2YPB59+AQe6vFJ0N+4MC6JleOaO4d1/+a+yTBagcU=
+
+Name: com/glavsoft/viewer/ParametersHandler$ParamsRetriever.class
+SHA-256-Digest: ReymSAZjtmChNglbrd82a5ON0LKYHR6eedgBjYPeuNs=
+
+Name: com/glavsoft/viewer/swing/mac/MacUtils$1.class
+SHA-256-Digest: IUQJnmYqKCCPEJl6mA+qd22JJaQLBcq1wUuZZ6uRxXY=
+
+Name: com/glavsoft/rfb/encoding/decoder/DesctopSizeDecoder.class
+SHA-256-Digest: AhOfZndLOiM+7n6g5fszW2aRl+Il7Ue4U5T9r6ntwuU=
+
+Name: com/glavsoft/viewer/images/button-ctrl-alt-del.png
+SHA-256-Digest: Hr4OWmZLIxMm9lEFrV2jOrMr5PQUKFCepm7vuCGfigk=
+
+Name: com/glavsoft/viewer/swing/gui/RequestSomethingDialog$2.class
+SHA-256-Digest: Yme+kNZBIkkT9Utb161J/Xd2r8r6SsIdXrgbTitjQvg=
+
+Name: com/glavsoft/viewer/swing/gui/AutoCompletionComboEditorDocument$
+ 1.class
+SHA-256-Digest: uMFkjKxaDX4rZyBMIV2Y5BGL3DvOMzwpw0ZPYXIzRvU=
+
+Name: com/glavsoft/viewer/swing/ssh/SshConnectionManager.class
+SHA-256-Digest: pYUfK5dRadH1EanK59Sp1j3xNThztSrd0jSC//M1aCo=
+
+Name: com/glavsoft/core/SettingsChangedEvent.class
+SHA-256-Digest: CoFwYEZdcTThQ7TquAjUzD5NA0tjDO3CbiW1Y5S6cj8=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$15.class
+SHA-256-Digest: /WENKSueom8BgvD3KxNLHsL10GK10e1iO/Uxfr5df0Q=
+
+Name: com/glavsoft/viewer/swing/SwingRfbConnectionWorker$PasswordChoos
+ er.class
+SHA-256-Digest: /b5P4yBBtOC6JXM8aw+YW5fVWpPRydoErjHsBczp870=
+
+Name: com/glavsoft/exceptions/UnsupportedProtocolVersionException.clas
+ s
+SHA-256-Digest: YOTMS+IsT75VrVTOmaIOpPbeRdqr5EY1eCQD03WQCj8=
+
+Name: com/glavsoft/rfb/client/VideoFreezeMessage.class
+SHA-256-Digest: 20JxmvWIOIg6MjLFLeMlX98zttnCbmKW/71+7XL50II=
+
+Name: com/glavsoft/rfb/encoding/decoder/FakeDecoder.class
+SHA-256-Digest: NFynaFu4LoscDFdUKrWM8C/7SpIF+yUlzbw/TGYVudA=
+
+Name: com/glavsoft/rfb/protocol/handlers/Handshaker$1.class
+SHA-256-Digest: LqM53WYIZ+/t219RspE/PNzlPHIr5lrsRC3fV8j1mHw=
+
+Name: com/glavsoft/viewer/images/button-file-transfer.png
+SHA-256-Digest: q8KS0gs8I8ejIKM4RQN1Jzaq7il7nMUEd8u1BwRu7no=
+
+Name: com/glavsoft/exceptions/CommonException.class
+SHA-256-Digest: E/2RSM9TIOpdKNGXsm9t3wtRP+QwNDfXl05jFwget0Q=
+
+Name: com/glavsoft/rfb/protocol/SenderTask.class
+SHA-256-Digest: T6hZ1ZB6G6gubzqI6a1XXi1vuTOYP+68souByO4Gcmk=
+
+Name: com/glavsoft/rfb/protocol/auth/SecurityType.class
+SHA-256-Digest: bk19GkynbLtHJDyrjs6oWiwaf4IFNaTU4wzbCTNObVY=
+
+Name: com/glavsoft/rfb/ClipboardController.class
+SHA-256-Digest: VDZIg/b6FdelWRPpF1tEhXeeQM0l+1yJGnhNqsasifs=
+
+Name: com/glavsoft/viewer/images/button-zoom-in.png
+SHA-256-Digest: owyS8NMw1crwMsuI2de1SaU3vG7ZJ7eljK83FJa3/R8=
+
+Name: com/glavsoft/viewer/images/cursor-smalldot.png
+SHA-256-Digest: 0Nqzlk03VA9E6f1/0AXzIx8jkAryRlcmatFDDTEtkjY=
+
+Name: com/glavsoft/viewer/images/tightvnc-logo-48x48.png
+SHA-256-Digest: 5N8lRmaLnPMEGARif6CUP2LnEM4NF1bE2D20DBY3gtE=
+
+Name: com/glavsoft/viewer/swing/KeyboardConvertor.class
+SHA-256-Digest: B6xhtdX8Ooq5j40bYlWml9hDFWzFatkd9Lao1Lcs41w=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$16.class
+SHA-256-Digest: Q+l3JC4+TKnEJd/BViyulJStQ0tbHg23DHRiQV3or4I=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$11.class
+SHA-256-Digest: 45uJsT+J4jZMAucH6zpSrUryyNaaEFvj0d8eUdRd/WQ=
+
+Name: com/glavsoft/viewer/swing/ModifierButtonEventListener.class
+SHA-256-Digest: 23MKQoIho+6IP0SFeXp6QVBj7HwACyZvmHfHZt/JX+k=
+
+Name: com/glavsoft/viewer/swing/CancelConnectionException.class
+SHA-256-Digest: zflEbVh5Ce7FjZFTRGHMihLJYPiqmGTDQ2+fM1wBZZM=
+
+Name: com/glavsoft/rfb/client/ClientToServerMessage.class
+SHA-256-Digest: f/kDjzEUS5KfjFvx5YqEai3WofbJtflExlxHR+FsX24=
+
+Name: com/glavsoft/rfb/encoding/decoder/CursorPosDecoder.class
+SHA-256-Digest: Ta47/ke0iSDrSopD1jn11zWA/vkc3H7URkStZxZzlbw=
+
+Name: com/glavsoft/viewer/images/button-rec.png
+SHA-256-Digest: RrH++j6SdF5i93HtqkR5uTAjgEBxdmMZloR51NmR4O4=
+
+Name: com/glavsoft/viewer/images/button-options.png
+SHA-256-Digest: AlhASLpJbsXsai7Rvp4XVtM8xm1ZtZzpn4wUrab2RFI=
+
+Name: com/glavsoft/viewer/images/cursor-nocursor.png
+SHA-256-Digest: cZMtAgJ/KP0c8+oyNxjgiudCIRHP0jRkqyt8dERer/w=
+
+Name: com/glavsoft/viewer/swing/gui/RequestSomethingDialog$3.class
+SHA-256-Digest: zfgzONLAwYevbVwGlKoeo8UD/6r5jJl3NCrPfAxyDu8=
+
+Name: com/glavsoft/utils/ViewerControlApi.class
+SHA-256-Digest: 5XQnZjY4kxKXI/uqaQgxUXPpAhBfsU5NExMIrZa14PU=
+
+Name: com/glavsoft/rfb/protocol/auth/NoneAuthentication.class
+SHA-256-Digest: qDsJAO3B8Kz8jE+LXpq7O2L4GPeVVEg6wTr+5mjGwm8=
+
+Name: com/glavsoft/rfb/client/SetEncodingsMessage.class
+SHA-256-Digest: 4eMVx4s8lMQ+wUcGv/2D6q/ykkUSIfgPMeOysGZyAyc=
+
+Name: com/glavsoft/utils/LazyLoaded$Loader.class
+SHA-256-Digest: 05BMLMNQYE2CT6VbWQMSw5UoAZ3iJhRtntnmX6yfjJ8=
+
+Name: com/glavsoft/utils/Strings.class
+SHA-256-Digest: IOnALQj8+dnWpLTPpoup1irbXlGg835cAki3OsyBudg=
+
+Name: com/glavsoft/utils/LazyLoaded.class
+SHA-256-Digest: UmmE+KzJK7Vg+o5aEpq+WmVDI8iEIByef5ruN0ns4yA=
+
+Name: com/glavsoft/viewer/images/tightvnc-logo-32x32.png
+SHA-256-Digest: qbL1zjVjcaV7ijONJZyWlzxWHcWTr1JC7v9hzX10XbY=
+
+Name: com/glavsoft/rfb/client/KeyEventMessage.class
+SHA-256-Digest: yUUJuv+uk7DeeFCUlngCtSF5BEK41EJImbFfu8LCYB8=
+
+Name: com/glavsoft/rfb/encoding/decoder/ByteBuffer$1.class
+SHA-256-Digest: hXwHIcuTCyqE5zR6x9XaPqEHtVfZc4SnYLu8DRvfq/w=
+
+Name: com/glavsoft/viewer/swing/mac/MacApplicationWrapper$1.class
+SHA-256-Digest: Rzc8j7AN8AwzNRYCBZvFU8B29Gqc9Tuz5apatRYUF/M=
+
+Name: com/glavsoft/viewer/swing/ssh/PrefsHelper.class
+SHA-256-Digest: Iemlc2IqemKUcRMS1er/uIQCWUbSdUiCTCe5+vGv4HU=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$14.class
+SHA-256-Digest: cRXYlvYwIaJNHkQ+Iz79eb4t4Xgsi7UqqmIaXDJrLuk=
+
+Name: com/glavsoft/viewer/cli/Parser$Option.class
+SHA-256-Digest: zNNZXx+HXu7i52U0CQCWKPumrqbt9z9tlHsPbcTrlRc=
+
+Name: com/glavsoft/transport/Transport.class
+SHA-256-Digest: wRDKkTWlJPKF6ixBNZjoKaoYPOKStFaqY6HzXro580c=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$ButtonsBar.class
+SHA-256-Digest: jo4sI/mt9JPX+xnc2ddoAN/JlRxDrUxU3etaZNVc0i0=
+
+Name: com/glavsoft/rfb/IRequestString.class
+SHA-256-Digest: +qgyZtpt9YRFLPjFyrtfP/PE5NUcXLAbEMOSm63TdJA=
+
+Name: com/glavsoft/viewer/swing/mac/MacUtils.class
+SHA-256-Digest: qJai7qFta9qx2HgVIADBExqlRR9qw/fG+cKnVLbP8As=
+
+Name: com/glavsoft/viewer/swing/ConnectionErrorException.class
+SHA-256-Digest: trCL8m43SU42r8UeIP1/JrPeO+R/+/zfgeOtJfcD0jc=
+
+Name: com/glavsoft/viewer/mvp/Model.class
+SHA-256-Digest: 443Vd9pQ7YAPyzBLUozpsD9CNF4o8Vw3eB3lVnJt9yI=
+
+Name: com/glavsoft/viewer/swing/CancelConnectionQuietlyException.class
+SHA-256-Digest: KKXtVb/LtnFn819qTsUE5dhMvyxbp93gQYSQh69TnO4=
+
+Name: com/glavsoft/rfb/protocol/tunnel/TunnelType.class
+SHA-256-Digest: bt04A6huo3LwzhJnHe1+zELY6x4DmAIggAEhY8QA5kI=
+
+Name: com/glavsoft/exceptions/CouldNotConnectException.class
+SHA-256-Digest: ALbt15DFPBVjj2dhEMypyyloLgsBzlt23UYJWM1U3F8=
+
+Name: com/glavsoft/viewer/swing/gui/StatusBar$1.class
+SHA-256-Digest: Farpoi/Gfi5/KFVdn/fDxCFAyON6IL6cH4pU2+nBiF4=
+
+Name: com/glavsoft/viewer/workers/RfbConnectionWorker.class
+SHA-256-Digest: ckPIH1LWvGEbhtkfZrnOw+TbnocgNOxM0n1YeygSpIs=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$5.class
+SHA-256-Digest: 1FiMyK54U9PxB50HBpGdJ4mJPJ94qF9I1S8/815dQPk=
+
+Name: com/glavsoft/viewer/Viewer$AppletStatusStringView.class
+SHA-256-Digest: MPyRU2GGJm4MBbB6JOWOC+wsvM44Oj5ws2E1JLX7WWY=
+
+Name: com/glavsoft/viewer/images/button-info.png
+SHA-256-Digest: c1oZb0uEt+n2tLTytjNS7/H9tCJ76WaarduUBIS8Go0=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$2.class
+SHA-256-Digest: i8AhdnuW4l2+BI7otYWhcEkWz52nm1B1S6khJtXbn/Y=
+
+Name: com/glavsoft/viewer/swing/ssh/RequestYesNoDialog$1.class
+SHA-256-Digest: UyPjsNlAhM1dgl9hdkFTB0U385I8vooEKgG+SXrCcLg=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionView.class
+SHA-256-Digest: 46lyYjJ46uGfznk+Wg2xegrLE20Na0QMY5JDOkUquf0=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$2.class
+SHA-256-Digest: MkFyxqcYmNRgiWaYOFd47bLL4GHjIgpws4aeff1agkQ=
+
+Name: com/glavsoft/viewer/mvp/Presenter.class
+SHA-256-Digest: 3BKhCNUWP2byj2QOk2YF9Xp3dCaM+3zu5dNqHb2ZITc=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$EmptyButtonsBarMouse
+ Adapter.class
+SHA-256-Digest: cvPYyr9cU/WQxxEvlrvmfmyQxLlvvtPg+UuIagTeGZg=
+
+Name: com/glavsoft/viewer/cli/Parser.class
+SHA-256-Digest: erVD792zIP1d0OeuOw9pL0dv4gLUlpXtDqFKQWlhQVI=
+
+Name: com/glavsoft/viewer/swing/gui/AutoCompletionComboEditorDocument.
+ class
+SHA-256-Digest: mYavd3xBaHySbFz7OQ62ZJsHYG/3y+3tsEEUiw7zkgM=
+
+Name: com/glavsoft/viewer/swing/ssh/RequestYesNoDialog.class
+SHA-256-Digest: k53CVSqQ+PDFcjJpU41UyiEYrkHGXektkn+Gyf9rSTE=
+
+Name: com/glavsoft/viewer/swing/gui/HostnameComboboxRenderer.class
+SHA-256-Digest: CpbKl21OzQjrFJv9UVtxUz4tHPSth7ditw2oAmvyyVo=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$12.class
+SHA-256-Digest: obRIVVih93qRsn/6YJOTN/f/TzmSfubpLOpYpnWJ31Q=
+
+Name: com/glavsoft/viewer/images/button-refresh.png
+SHA-256-Digest: FjlCE+EMfoBLb6fLO2YhMKwfPM7/dtjiGoyDb9ftoyA=
+
+Name: com/glavsoft/viewer/swing/gui/AutoCompletionComboEditorDocument$
+ 2.class
+SHA-256-Digest: IQW0M/Z++c4PrM1iacWb7fTMVu3FwCM1RV7Ylac4Z50=
+
+Name: com/glavsoft/rfb/client/VideoRectangleSelectionMessage.class
+SHA-256-Digest: f9eM5T5bHgS5krqDyjBggBwA4xmU/OUr2xJ1t+DEh+4=
+
+Name: com/glavsoft/rfb/encoding/decoder/HextileDecoder.class
+SHA-256-Digest: Ik75swdRzxYK00z2jO36szE7ze9wbPxDixgBmzKa2V8=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView$4.class
+SHA-256-Digest: IpLMbe8P6wAFXxaClSPCJYdGHPbwDc5tYswO87XUzP8=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog.class
+SHA-256-Digest: yWEVawRXY8EVZPpGQU1rF5juSrmr/DasEKBA0pxP5Y0=
+
+Name: com/glavsoft/rfb/protocol/LocalPointer.class
+SHA-256-Digest: m5K27Do6LmSlgdCsWxXo+tG/tSSIfeuMQNMH5E0csPk=
+
+Name: com/glavsoft/viewer/mvp/View.class
+SHA-256-Digest: e7ix18ZHwf8KjIie9c7obNaWfrkh4jwLVweyyLl2qCo=
+
+Name: com/glavsoft/viewer/swing/KeyEventListener.class
+SHA-256-Digest: WP5OFb7UPJ+3a01gJl7G6nLTnwBo9IqAttxW7/5vjIA=
+
+Name: com/glavsoft/viewer/images/button-zoom-fit.png
+SHA-256-Digest: 9cyMG1sNQ+j96RtuR6uTHGoz6EF+jhN1aNuCEQERvk0=
+
+Name: com/glavsoft/viewer/swing/SwingRfbConnectionWorker.class
+SHA-256-Digest: HGSesRy0AsLmuaakIdIPICmhMbpyiUNRUCJi5sT8ZFk=
+
+Name: com/glavsoft/viewer/swing/SoftCursorImpl.class
+SHA-256-Digest: blMz/0P2jbrhXYgUKBFPW2BlK3NO8RUZnh4icEK0HpQ=
+
+Name: com/glavsoft/rfb/protocol/tunnel/TunnelHandler.class
+SHA-256-Digest: wEk7RlQLOveGk0Xt61EjFyqovkeGGNDY8DmCZ6BNDCY=
+
+Name: com/glavsoft/viewer/swing/ClipboardControllerImpl.class
+SHA-256-Digest: CPOGMeDPvin+LBMvcuM4IlxhQ2x6MQmk/B76n2LO/OA=
+
+Name: com/glavsoft/rfb/encoding/decoder/Decoder.class
+SHA-256-Digest: 0y0xpW54MLnbocvvj6JTXRXnm9gt8T6I4mPSc+Vd/tE=
+
+Name: com/glavsoft/viewer/swing/ssh/TrileadSsh2ConnectionManager$HostV
+ erifier.class
+SHA-256-Digest: 4h170wXs+NEVoDVmHWEU9s2yuUX3CtrLCT7XPzng1bU=
+
+Name: com/glavsoft/viewer/swing/ssh/TrileadSsh2ConnectionManager$1.cla
+ ss
+SHA-256-Digest: 8Pm4+7I+jmM4m1hpLjOJut/APiKnCaoY7NQm0xTqkrE=
+
+Name: com/glavsoft/rfb/encoding/decoder/RawDecoder.class
+SHA-256-Digest: ftQpWEmNsykWDts/6E4TMuayERlqRwHgZNxCRBcV6PY=
+
+Name: com/glavsoft/viewer/workers/AbstractConnectionWorkerFactory.clas
+ s
+SHA-256-Digest: w6zNPD8WRgU6JUasWYurmOk/uNUskxcmpNMLFWQ7K98=
+
+Name: com/glavsoft/viewer/swing/SwingRfbConnectionWorker$1.class
+SHA-256-Digest: 0laiEv1sGFUqXOcneAatbfUV5YGvoBimndZDuUjlf1Q=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow$13.class
+SHA-256-Digest: xAJGykmPS9ur1fNga8ZvGY58zrTpXqw/Wf7i3dQUF3E=
+
+Name: com/glavsoft/viewer/images/button-new-connection.png
+SHA-256-Digest: tbc6AvDK1bY9kwAF453wY1MDMdwibe3RvQKHo35cJH8=
+
+Name: com/glavsoft/rfb/encoding/decoder/RREDecoder.class
+SHA-256-Digest: NvMiYI/aUcwsnHa4kaJ0tjFiYbuumHjkxrXkMAjnLEs=
+
+Name: com/glavsoft/rfb/IRfbSessionListener.class
+SHA-256-Digest: uTJcUNqg4+6LQgKfk6N0YnIr/hWB6Thp23iuTU/fSyY=
+
+Name: com/glavsoft/viewer/swing/gui/OptionsDialog$EncodingSelectItem.c
+ lass
+SHA-256-Digest: rp9AZplaq/YOe/5rGsmeLV4HF1+Veg66Lnvs8mwTosk=
+
+Name: com/glavsoft/exceptions/AuthenticationFailedException.class
+SHA-256-Digest: H5bZfGTDP2zSheK/4LvDFhVI1WB5pWaJWko/Bb35Ln8=
+
+Name: com/glavsoft/viewer/swing/gui/ConnectionDialogView.class
+SHA-256-Digest: CuaknwZUoGz5HbNypGcZn52EvOiKoX8xz759e+gLNMs=
+
+Name: com/glavsoft/viewer/images/tightvnc-logo-16x16.png
+SHA-256-Digest: NudURLJRkqEFmqgq++xyHrkr9n9O/ez8o3Eu2fKZe34=
+
+Name: com/glavsoft/viewer/swing/SwingViewerWindow.class
+SHA-256-Digest: cMrM5nNTNt9O9ysJoMx70Lm2zagG8ZtvvYvji1P9wlk=
+
+Name: com/glavsoft/viewer/swing/MouseEnteredListener.class
+SHA-256-Digest: 4ZqYrjpCZfvjIevmOFYQ55hohzTaoR+UyvJjGG74pnA=
+

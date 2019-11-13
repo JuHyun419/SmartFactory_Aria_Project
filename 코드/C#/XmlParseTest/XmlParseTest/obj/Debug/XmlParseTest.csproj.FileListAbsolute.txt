@@ -1,0 +1,7 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\bin\Debug\XmlParseTest.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\bin\Debug\XmlParseTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\bin\Debug\XmlParseTest.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\obj\Debug\XmlParseTest.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\obj\Debug\XmlParseTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\obj\Debug\XmlParseTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlParseTest\XmlParseTest\obj\Debug\XmlParseTest.pdb

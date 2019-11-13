@@ -1,0 +1,10 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\bin\Debug\XmlWriteTest.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\bin\Debug\XmlWriteTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\bin\Debug\XmlWriteTest.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.Form1.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.Properties.Resources.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\XmlWriteTest\XmlWriteTest\obj\Debug\XmlWriteTest.pdb

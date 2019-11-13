@@ -1,0 +1,10 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\bin\Debug\TCPIPServerTest.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\bin\Debug\TCPIPServerTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\bin\Debug\TCPIPServerTest.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.Form1.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.Properties.Resources.resources
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIPServerTest\TCPIPServerTest\obj\Debug\TCPIPServerTest.pdb

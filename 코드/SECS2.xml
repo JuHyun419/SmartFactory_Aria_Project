@@ -1,0 +1,13 @@
+<SECS2_XML_MESSAGE>
+    <HEAD Id = "1001">
+      <!-- 수신하는 측에서는 수신된 메세지의 SystemByte를 송신 시 사용해야 한다. -->
+      <SystemByte> 00001 </SystemByte>
+      <CMD> 3 </CMD>
+      <Stream> 2 </Stream>
+      <Function> 42 </Function>
+    </HEAD>
+    <BODY>
+      <!-- Item Dictionary에서 HCACK를 참고하여 적절한 값을 집어 넣는다. -->
+      <HCACK> 0 </HCACK>
+    </BODY>
+  </SECS2_XML_MESSAGE>

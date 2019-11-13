@@ -1,0 +1,117 @@
+*******qr코드 정의********
+qr코드
+제품 고유번호
+모델 이름
+모델 온도
+모델 습도
+
+01 02 03 04 05 (파랑) - 정상품 고유번호
+10 20 30 40 50 (빨강) - 정상품 고유번호
+
+아리아크림빵 파랑 전부 다 아리아 크림빵
+빨강은 3개는 아리아크림빵 2개는 아리아메론빵
+
+string temp string humid
+
+{{제품고유번호,모델이름,모델온도,모델습도}}
+
+{{product_number,model_name,model_temp,model_humid}}
+*******qr코드 정의 끝*********
+
+*********CEID LIST xml 양식************
+
+*******CEID1********
+  <SECS2_XML_MESSAGE>
+    <HEAD>
+      <SystemByte> 00002 </SystemByte>
+      <CMD> 3 </CMD>
+      <Stream> 6 </Stream>
+      <Function> 11 </Function>
+    </HEAD>
+    <BODY>
+      <!-- Event에 대한 고유 번호 이다. -->
+      <CEID> 1 </CEID>
+      <REPORTS>
+        <REPORT>
+          <!-- Report에 대한 ID를 나타낸다. Variable들을 그룹화하기 위해 사용되어 진다. -->
+          <REPORTID> 100 </REPORTID>
+          <VARIABLES>
+            <!-- 사전에 약속된 값을 전달 한다. -->
+            <Product_number> 01,02,10,20 </Product_number>
+            <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
+            <Model_temp> 15.5 </Model_temp>
+	<Model_humid> 40.6 </Model_humid>
+	<Color> "Blue" or "Red" <Color>
+	<Fail_reason> reason </Fail_reason>
+	<Barcode> {{product_number,model_name,model_temp,model_humid}} </Barcode>
+	<C/V move state> 임의값 </C/V move state>
+	<Robot gripper state> 임의값 </Robot gripper state>
+          </VARIABLES>
+        </REPORT>
+      </REPORTS>
+    </BODY>
+  </SECS2_XML_MESSAGE>
+
+*******CEID2********
+  <SECS2_XML_MESSAGE>
+    <HEAD>
+      <SystemByte> 00002 </SystemByte>
+      <CMD> 3 </CMD>
+      <Stream> 6 </Stream>
+      <Function> 11 </Function>
+    </HEAD>
+    <BODY>
+      <!-- Event에 대한 고유 번호 이다. -->
+      <CEID> 2 </CEID>
+      <REPORTS>
+        <REPORT>
+          <!-- Report에 대한 ID를 나타낸다. Variable들을 그룹화하기 위해 사용되어 진다. -->
+          <REPORTID> 200 </REPORTID>
+        </REPORT>
+      </REPORTS>
+    </BODY>
+  </SECS2_XML_MESSAGE>
+
+*******CEID3********
+  <SECS2_XML_MESSAGE>
+    <HEAD>
+      <SystemByte> 00002 </SystemByte>
+      <CMD> 3 </CMD>
+      <Stream> 6 </Stream>
+      <Function> 11 </Function>
+    </HEAD>
+    <BODY>
+      <!-- Event에 대한 고유 번호 이다. -->
+      <CEID> 3 </CEID>
+      <REPORTS>
+        <REPORT>
+          <!-- Report에 대한 ID를 나타낸다. Variable들을 그룹화하기 위해 사용되어 진다. -->
+          <REPORTID> 300 </REPORTID>
+        </REPORT>
+      </REPORTS>
+    </BODY>
+  </SECS2_XML_MESSAGE>
+
+*******CEID4********
+  <SECS2_XML_MESSAGE>
+    <HEAD>
+      <SystemByte> 00002 </SystemByte>
+      <CMD> 3 </CMD>
+      <Stream> 6 </Stream>
+      <Function> 11 </Function>
+    </HEAD>
+    <BODY>
+      <!-- Event에 대한 고유 번호 이다. -->
+      <CEID> 4 </CEID>
+      <REPORTS>
+        <REPORT>
+          <!-- Report에 대한 ID를 나타낸다. Variable들을 그룹화하기 위해 사용되어 진다. -->
+          <REPORTID> 400 </REPORTID>
+          <VARIABLES>
+            <Temp> 25.0 </Temp>
+            <Humid> 50.0 </Humid>
+          </VARIABLES>
+        </REPORT>
+      </REPORTS>
+    </BODY>
+  </SECS2_XML_MESSAGE>

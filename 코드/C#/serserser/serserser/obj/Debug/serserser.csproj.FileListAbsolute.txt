@@ -1,0 +1,13 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\obj\Debug\serserser.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\obj\Debug\serserser.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\serserser.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\serserser.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\serserser.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\MySql.Data.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\Google.Protobuf.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\Renci.SshNet.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\bin\Debug\MySql.Data.xml
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\obj\Debug\serserser.csproj.CopyComplete
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\obj\Debug\serserser.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\serserser\serserser\obj\Debug\serserser.pdb

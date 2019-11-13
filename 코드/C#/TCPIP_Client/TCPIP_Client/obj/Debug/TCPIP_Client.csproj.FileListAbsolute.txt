@@ -1,0 +1,7 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\bin\Debug\TCPIP_Client.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\bin\Debug\TCPIP_Client.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\bin\Debug\TCPIP_Client.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\obj\Debug\TCPIP_Client.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\obj\Debug\TCPIP_Client.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\obj\Debug\TCPIP_Client.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\TCPIP_Client\TCPIP_Client\obj\Debug\TCPIP_Client.pdb

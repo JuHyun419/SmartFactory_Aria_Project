@@ -1,0 +1,600 @@
+--------------------- raspi.py ---------------------  
+
+import serial   # 아두이노 통신 라이브러리
+from time import *  
+from multiprocessing import Queue, Process
+from import_detect import *
+import Adafruit_DHT # 온습도 라이브러리
+from socket import *
+from xml.etree.ElementTree import Element, SubElement, ElementTree, dump    # XML 모듈
+
+BAUDRATE = 9600
+time_flag = 0
+last_time = 0
+
+sensor = Adafruit_DHT.DHT11
+pin = '4'
+
+#clientSock = socket(AF_INET, SOCK_STREAM)
+#clientSock.connect(('220.69.249.231', 4000))
+
+# 보기 좋게 xml 만드는 함수, 줄바꿈, 들여쓰기 작업
+def indent(elem, level=0): #자료 출처 https://goo.gl/J8VoDK
+    i = "\n" + level*"  "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "  "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i
+
+def humanity_temp():
+    
+    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+    humidty2 = str(humidity)
+    temperature2 = str(temperature)
+
+    # 온습도 값이 존재할 때 -> 온습도값 리턴
+    if humidity is not None and temperature is not None:
+        #clientSock.send(humidty2.encode('utf-8'))
+        #clientSock.send(temperature2.encode('utf-8'))
+        return int(temperature), int(humidity)
+
+    # 온습도 값이 존재하지 않을 때
+    else:
+        #print('Failed to get reading. Try again!')
+        temperature = 0 
+        humidity = 0 
+        return temperature, humidity   
+    
+# 시리얼 객체 생성(ser)
+def serial_open():
+    ser = serial.Serial('/dev/ttyAMA0', baudrate = BAUDRATE)
+    
+    return ser
+
+# 아두이노에게 데이터 전송
+def command_arduino(ser, i):
+    command = ["go\n", "stop\n", "rgrab\n", "fgrab\n"]
+    
+    command[i] = command[i].encode('utf-8')
+    ser.write(command[i])
+
+# 아두이노로 부터 데이터 받는 함수
+def receive_arduino(ser, q):
+    if ser.readable():
+        data = ser.readline()
+
+        # decode() : 바이트로 들어온 데이터 해결
+        data = str(data[:-1].decode())  
+        q.put(data)
+
+def get_H_T():
+    global time_flag
+    global last_time
+    global temp1
+    global hum2
+    
+    if time_flag == 0:
+        last_time = time()
+        time_flag = 1
+    
+    if time() - last_time >= 10:
+        temp, hum = humanity_temp()
+        temp1 = temp
+        hum2 = hum
+        time_flag = 0
+        print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
+   
+# 이미지 처리(카메라)
+def image_process(cap, ser, q, state_flag, state_list):
+
+    goods_x, signal, barcode = cam(cap)
+        
+    if signal == 'P' and (goods_x >= 60 and goods_x <= 272):
+        if state_flag == "SEND_STOP":
+            command_arduino(ser, 1)
+            state_flag = "SEND_GRAB"
+
+        if state_flag == "SEND_GRAB"  and len(barcode) > 5:
+            sleep(0.01)
+            command_arduino(ser, 2)
+            state_flag = "WAIT"
+            
+    elif signal == 'F' and (goods_x >= 60 and goods_x <= 272):
+        if state_flag == "SEND_STOP":
+            command_arduino(ser, 1)
+            state_flag = "SEND_GRAB"
+
+        if state_flag == "SEND_GRAB"  and len(barcode) > 5:
+            sleep(0.01)
+            command_arduino(ser, 3)
+            state_flag = "WAIT"
+            
+    else:
+        if q.empty() == False and signal == 'N':
+            rx_data = q.get()
+            print(rx_data)
+            if rx_data == "complete":
+                command_arduino(ser, 0)
+                state_flag = "SEND_STOP"
+    return state_flag
+    
+def main_process(ser, q):
+    
+    state_list = ["WAIT", "SEND_STOP", "SEND_GRAB" ]
+
+    cap = open_cam()
+    command_arduino(ser, 0)
+    state_flag = state_list[1]
+    q.put("start")
+    
+    sleep(1)
+    
+    while True:
+        
+        state_flag = image_process(cap, ser, q, state_flag, state_list)
+        
+        if cv.waitKey(1) & 0xFF == 27:
+            break 
+          
+    cap.release()
+    cv.destroyAllWindows()  
+
+def serve_process(ser, q):
+    while True:
+        receive_arduino(ser, q)
+        
+def temp_huminity_process(q):
+    factory_state = ""
+    temp_state = 1
+    
+    while True:
+        if q.empty() == False and temp_state == 1:
+            factory_state = q.get()
+            temp_state = 2
+        
+        if factory_state == "start" and temp_state == 2:
+            get_H_T()
+try:
+    if __name__ == "__main__":
+        print("start \n")
+        q = Queue()
+        ser = serial_open()
+        p1 = Process(target = main_process, args = (ser,q))
+        p2 = Process(target = serve_process, args = (ser,q))
+        p3 = Process(target = temp_huminity_process, args = (q, ))
+        p1.start()
+        p2.start()
+        p3.start()
+        print("ggggg")
+        
+except KeyboardInterrupt:
+    print("exit() \n")
+    p1.join()
+    p2.join()
+    p3.join()
+
+
+--------------------- import_detect.py ---------------------  
+import cv2 as cv
+import numpy as np
+from multiprocessing import Queue, Process
+from pyzbar import pyzbar
+
+CAM_ID = 0
+CAM_WIDTH = 352  #480
+CAM_HEIGHT = 288 #320
+
+signal = 'N'
+data = ""
+
+### blue, red 영역의 from ~ to 값의 범위
+lower_blue = np.array([90, 171, 149])
+upper_blue = np.array([120,255,255])
+
+lower_red1 = np.array([160, 50, 212]) 
+upper_red1 = np.array([179, 255, 255])
+
+lower_red2 = np.array([0, 65, 199])
+upper_red2 = np.array([8, 255, 255])
+
+# 카메라 실행
+def open_cam(camera = CAM_ID):
+    
+    cap = cv.VideoCapture(camera)
+    
+    if cap.isOpened():
+        cap.set(cv.CAP_PROP_FRAME_WIDTH, CAM_WIDTH) # 화면 크기 설정
+        cap.set(cv.CAP_PROP_FRAME_HEIGHT, CAM_HEIGHT)
+        return cap
+        
+    else:
+        print("camera open failed \n")
+
+def cam_streaming(cap):
+    ret, frame = cap.read()
+    
+    if ret == True:
+        return frame
+    
+    else:
+        print("camera read error \n")
+        
+# 이미지 필터링
+# HSV - 이미지 처리에서 가장 많이 사용되는 형태의 Color 모델
+#       하나의 모델에서 색, 채도, 명도를 모두 알 수 있음 
+def image_filter(frame):
+    
+    # BGR -> HSV로 변환
+    hsv_blue = cv.cvtColor(frame, cv.COLOR_BGR2HSV) 
+    hsv_red = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
+
+    # 이미지에서 blue, red 영역
+    mask_blue = cv.inRange(hsv_blue, lower_blue, upper_blue)
+    mask_red1 = cv.inRange(hsv_red, lower_red1, upper_red1)
+    mask_red2 = cv.inRange(hsv_red, lower_red2, upper_red2)
+
+    mask_red = cv.add(mask_red1, mask_red2)
+    
+    erode_blue_image = cv.erode(mask_blue, None, iterations = 2)
+    dilate_blue_image = cv.dilate(mask_blue, None, iterations = 2)
+    
+    erode_red_image = cv.erode(mask_red, None, iterations = 2)
+    dilate_red_image = cv.dilate(mask_red, None, iterations = 2)
+    
+    return dilate_blue_image, dilate_red_image 
+
+def detect_goods(filter_blue_image, filter_red_image, frame):
+    contours_blue = cv.findContours(filter_blue_image.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)[-2]
+    contours_red = cv.findContours(filter_red_image.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)[-2]
+    
+    if len(contours_blue) > 0:
+        c = max(contours_blue, key=cv.contourArea)
+        signal = 'P'    
+        
+    elif len(contours_red) > 0:
+        c = max(contours_red, key=cv.contourArea)
+        signal = 'F'
+    
+    else:
+        signal = 'N'
+        #print("no goods ! signal: N \n\n")
+        x = 9999 
+        y = 9999
+        data = ""
+        return x, signal, data, frame
+ 
+    ((x, y), radius) = cv.minEnclosingCircle(c) 
+    x = int(x)
+    y = int(y)
+      
+    if int(radius) > 15:
+        (data, frame) = read_barcode(frame)
+        #print("QRCODE: " + data + " signal: " + signal + "\n\n")
+        cv.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
+        cv.circle(frame, (int(x), int(y)), 5, (0, 255, 255), -1)
+        cv.putText(frame, str(x)+' , '+str(y), (x, y + 40), cv.FONT_HERSHEY_PLAIN, 1.0, (0, 255, 0), 2)
+        return x, signal, data, frame
+    
+    else:
+        #print("circle is too small \n\n")  
+
+        x = -1
+        y = -1
+        data = ""
+        return x, signal, data, frame
+
+def read_barcode(frame):
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    decoded = pyzbar.decode(gray)
+    barcode_data = ""
+    
+    if len(decoded) > 0:
+        for d in decoded: 
+            x, y, w, h = d.rect
+
+            barcode_data = d.data.decode("utf-8")
+            barcode_type = d.type
+            text = '%s (%s)' % (barcode_data, barcode_type)
+            cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
+            
+            return barcode_data, frame
+    
+    else:
+        return barcode_data, frame    
+
+def cam(cap):
+    
+    frame = cam_streaming(cap)
+
+    frame = cv.GaussianBlur(frame, (1, 1), 0)
+    
+    (filter_blue_image, filter_red_image) = image_filter(frame)
+    
+    x, signal, data, frame = detect_goods(filter_blue_image, filter_red_image, frame)
+    cv.rectangle(frame, (80, 0), (272, 288), (0, 0, 255), 2)
+    
+    cv.imshow('frame', frame)
+    cv.imshow('filter_blue_mask', filter_blue_image)
+    cv.imshow('filter_red_mask', filter_red_image)
+    
+    return x, signal, data        
+
+--------------------- 아두이노 ---------------------  
+#include <SoftwareSerial.h>
+#include <Servo.h>
+
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+
+const int GRAB_UNDER_SERVO = 5;
+const int GRAB_UPPER_SERVO = 6;
+const int BASKET_LEFT_SERVO = 10;
+const int BASKET_RIGHT_SERVO = 9;
+
+// 컨베이어 벨트
+const int IN1 = 12;
+const int IN2 = 13;
+const int EN1 = 3;  
+
+// 피니언 렉
+const int IN3 = 2;
+const int IN4 = 4;
+const int EN2 = 11;
+
+const int rx = 8;
+const int tx = 7;
+SoftwareSerial swSerial(rx, tx);
+
+String rx_data = "";
+int angle = 0;
+int red_count = 0, blue_count = 0;
+
+void setup() 
+{
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(EN1, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(EN2, OUTPUT);
+
+  servo1.attach(GRAB_UNDER_SERVO);  // 로봇팔 회전해주는 모터, 5번
+  servo2.attach(GRAB_UPPER_SERVO);  // 로봇팔, 6번
+  servo3.attach(BASKET_LEFT_SERVO); // 왼쪽 바구니, 10번
+  servo4.attach(BASKET_RIGHT_SERVO);  // 오른쪽 바구니, 9번
+
+  // 컨베이어
+  digitalWrite(IN1, 0); // 12번
+  digitalWrite(IN2, 0); // 13번
+  analogWrite(EN1, 0);  // 3번
+
+  // 피니언 랙
+  digitalWrite(IN3, 0); // 2번
+  digitalWrite(IN4, 0); // 4번
+  analogWrite(EN2, 0);  // 11번
+
+  // 각 모터 초기화 값
+  servo1.write(90);   // 로봇팔 회전해주는 모터 - 초기값 
+  servo2.write(180);  // 로봇팔 - 0 : 접은거, 180 : 펼친거
+  servo3.write(180);  // 왼쪽바구니 - 0 : 엎음, 180 : 초기값
+  servo4.write(0);    // 오른쪽 바구니 - 0 : 초기값, 180 : 엎음    
+  
+  Serial.begin(9600);
+  swSerial.begin(9600);
+}
+
+void loop() 
+{  
+   // 파이로부터 받은 데이터가 있을때
+   if(swSerial.available())
+   {
+      rx_data = Rec_data();
+      
+      if (rx_data == "go")
+      {
+          Serial.println("go");
+          conveyer_dc_op();
+      }
+       
+      else if(rx_data == "stop")
+      {
+         Serial.println("stop");
+         conveyer_dc_st();
+      }
+      
+      else if(rx_data == "rgrab")
+      {
+        Serial.println("rgrab");
+        blue_count ++;
+        Grab_Regular_object();
+        delay(1000);
+        
+        if(blue_count == 1)
+        {
+          Input_Left_Basket();
+        }
+        blue_count = 0;
+        swSerial.write("complete\n");  
+      }
+
+      else if(rx_data == "fgrab")
+      {
+        Serial.println("fgrab");
+        red_count ++;
+        Grab_Inferior_object();
+        delay(1000);
+        
+        if(red_count == 1)
+        {
+          Input_Right_Basket();
+        }
+        red_count = 0;
+        swSerial.write("complete\n");    
+      }
+   }
+}
+
+// 데이터 읽어오는 함수
+String Rec_data()
+{
+  String data = "";
+  data = swSerial.readStringUntil('\n');
+  return data;
+}
+
+void left_basket_op()
+{
+  for(angle = 180; angle >= 80; angle--) 
+  { 
+    servo3.write(angle); 
+    delay(25);
+  } 
+
+  delay(1000);
+
+  for(angle = 80; angle <= 180; angle++) 
+  { 
+    servo3.write(angle); 
+    delay(25); 
+  }
+}
+
+void right_basket_op()
+{
+  for(angle = 0; angle <= 100; angle++) 
+  { 
+    servo4.write(angle); 
+    delay(25);
+  } 
+
+  delay(1000);
+
+  for(angle = 100; angle >= 0; angle--) 
+  { 
+    servo4.write(angle); 
+    delay(25); 
+  }
+}
+
+// 로봇팔 접은상태 -> 펴기
+void open_teol()
+{
+  for(angle = 0; angle <= 180; angle++) 
+  { 
+    servo2.write(angle); 
+    delay(25); 
+  } 
+}
+
+// 로봇팔 접는거
+void close_teol()
+{
+  for(angle = 180; angle >= 0; angle--) 
+  { 
+    servo2.write(angle); 
+    delay(25); 
+  } 
+}
+
+// 정상 잡는 함수
+void Grab_Regular_object()
+{
+  close_teol(); // 로봇팔 접고
+  delay(100);
+  servo1.write(0);  // 로봇팔 회전해주는거 왼쪽
+  delay(100);
+  open_teol();  // 로봇팔 펴고
+  delay(100);  
+  servo1.write(90); // 로봇팔 회전해주는거 원래위치
+}
+
+// 불량 잡는 함수(정상 잡는 함수와 반대)
+void Grab_Inferior_object()
+{
+  close_teol();
+  delay(100);
+  servo1.write(180);
+  delay(100);
+  open_teol();
+  delay(100);  
+  servo1.write(90);
+}
+
+// 우측 바구니 담는거
+void Input_Right_Basket()
+{
+  rack_forward(); // 피니언 움직이는 함수 - rack_~~()
+  delay(100);
+  rack_stop();
+  delay(100);
+  right_basket_op();
+  delay(100); 
+  rack_backward();
+  delay(100);
+  rack_stop();
+}
+
+// 좌측 바구니 담는거
+void Input_Left_Basket()
+{
+  rack_forward();
+  delay(100);
+  rack_stop();
+  delay(100);
+  left_basket_op();
+  delay(100); 
+  rack_backward();
+  delay(100);
+  rack_stop();
+}
+
+// 피니언 움직이는 함수(박스 쪽으로)
+void rack_forward()
+{
+  digitalWrite(IN3, 1); // 2번
+  digitalWrite(IN4, 0); // 4번
+  analogWrite(EN2, 30);
+  delay(4500);
+}
+
+void rack_backward()
+{
+  digitalWrite(IN3, 0);
+  digitalWrite(IN4, 1);
+  analogWrite(EN2, 30);
+  delay(4000);
+}
+
+void rack_stop()
+{
+  digitalWrite(IN3, 0);
+  digitalWrite(IN4, 0);
+  analogWrite(EN2, 0);
+}
+
+// 컨베이어벨트 동작(0, 1 = 정방향, 53 = 속도)
+void conveyer_dc_op()
+{
+  digitalWrite(IN1, 0);
+  digitalWrite(IN2, 0);
+  analogWrite(EN1, 0);
+}
+
+// 컨베이어벨트 정지
+void conveyer_dc_st()
+{
+  digitalWrite(IN1, 0);
+  digitalWrite(IN2, 0);
+  analogWrite(EN1, 0);
+}

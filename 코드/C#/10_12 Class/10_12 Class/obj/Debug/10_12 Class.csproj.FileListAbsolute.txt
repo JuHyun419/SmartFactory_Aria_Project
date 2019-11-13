@@ -1,0 +1,7 @@
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\bin\Debug\10_12 Class.exe.config
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\bin\Debug\10_12 Class.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\bin\Debug\10_12 Class.pdb
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\obj\Debug\10_12 Class.csprojAssemblyReference.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\obj\Debug\10_12 Class.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\obj\Debug\10_12 Class.exe
+C:\Users\User\Desktop\스마트팩토리 3개월 쁘로젝투\코드\10_12 Class\10_12 Class\obj\Debug\10_12 Class.pdb
