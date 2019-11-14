@@ -1,4 +1,4 @@
-#include <SoftwareSerial.h>
+#include <SoftwareSerial.h> // 시리얼 통신 라이브러리
 #include <Servo.h>
 
 Servo servo1;
