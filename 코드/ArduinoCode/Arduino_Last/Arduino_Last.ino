@@ -38,7 +38,7 @@ void setup()
   pinMode(IN4, OUTPUT);
   pinMode(EN2, OUTPUT);
 
-  servo1.attach(GRAB_UNDER_SERVO);  // 로봇팔 회전해주는 모터, 5번
+  servo1.attach(GRAB_UNDER_SERVO);  // 로봇팔 회전 모터, 5번
   servo2.attach(GRAB_UPPER_SERVO);  // 로봇팔, 6번
   servo3.attach(BASKET_LEFT_SERVO); // 왼쪽 바구니, 10번
   servo4.attach(BASKET_RIGHT_SERVO);  // 오른쪽 바구니, 9번
