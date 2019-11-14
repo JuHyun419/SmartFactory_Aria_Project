@@ -122,7 +122,7 @@ String Rec_data()
   return data;
 }
 
-// 좌측 바구니 
+// 좌측 바구니 관련 함수
 void left_basket_op()
 {
   // 좌측 바구니 비우기(100도 회전)
@@ -142,7 +142,7 @@ void left_basket_op()
   }
 }
 
-// 우측 바구니
+// 우측 바구니 관련 함수
 void right_basket_op()
 {
   // 우측 바구니 비우기(100도 회전)
@@ -208,7 +208,7 @@ void Grab_Inferior_object()
   servo1.write(90); // 로봇팔 회전(원위치)
 }
 
-// 우측 바구니 담는거
+// 우측 바구니 담는 함수
 void Input_Right_Basket()
 {
   rack_forward(); // 피니언을 박스담는 쪽으로 움직이는 함수
@@ -222,7 +222,7 @@ void Input_Right_Basket()
   rack_stop();    // 피니언 정지
 }
 
-// 좌측 바구니 담는거
+// 좌측 바구니 담는 함수
 void Input_Left_Basket()
 {
   rack_forward(); // 피니언을 박스담는 쪽으로 움직이는 함수
@@ -254,7 +254,7 @@ void rack_backward()
   delay(4600);
 }
 
-// 피니언 정지
+// 피니언 정지 함수
 void rack_stop()
 {
   digitalWrite(IN3, 0);
@@ -262,7 +262,7 @@ void rack_stop()
   analogWrite(EN2, 0);
 }
 
-// 컨베이어벨트 동작(0, 1 = 정방향, 53 = 속도)
+// 컨베이어벨트 동작 함수(0, 1 = 정방향, 53 = 속도)
 void conveyer_dc_op()
 {
   digitalWrite(IN1, 0); // 12번
@@ -270,7 +270,7 @@ void conveyer_dc_op()
   analogWrite(EN1, 53); // 3번
 }
 
-// 컨베이어벨트 정지
+// 컨베이어벨트 정지 함수
 void conveyer_dc_st()
 {
   digitalWrite(IN1, 0); // 12번
