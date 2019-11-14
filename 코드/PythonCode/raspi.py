@@ -5,7 +5,6 @@ from import_detect import * # import_detect.py 파일 불러옴
 import Adafruit_DHT         # 온습도 관련 라이브러리
 from AriaMethod import *    # AriaMethod.py 파일 불러옴
 
-
 BAUDRATE = 9600
 time_flag = 0
 last_time = 0
@@ -13,7 +12,6 @@ last_time = 0
 # SystemBytePlus() 함수에서 사용될 문자열, 리스트
 SystemByteResult = ""
 SystemByte = [0, 0, 0, 0, 0]
-
 
 sensor = Adafruit_DHT.DHT11
 pin = '4'
@@ -57,7 +55,7 @@ def humanity_temp():
         humidity = 0 
         return temperature, humidity   # 온습도 0으로 초기화 후 리턴
     
-# 시리얼 객체 생성(open)
+# 시리얼 객체 생성(open) - 아두이노 통신
 def serial_open():
     ser = serial.Serial('/dev/ttyAMA0', baudrate = BAUDRATE)
     return ser
@@ -78,88 +76,109 @@ def receive_arduino(ser, q):
         data = str(data[:-1].decode())  
         q.put(data)
 
-
-
 # 온습도 출력
 def get_H_T():
-    
     global time_flag
     global last_time
-    
     if time_flag == 0:
         last_time = time()
         time_flag = 1
     
     # 10초 간격 온습도 출력
-    if time() - last_time >= 3:
+    if time() - last_time >= 10:
         temp, hum = humanity_temp()
         time_flag = 0
         print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
-        SystemByteResult = SystemBytePlus()
-        Send_s6f11_TempHumid(SystemByteResult, temp, hum)
-   
-#def image_process(cap, ser, q, state_flag = 1):
-    
-def main_process(ser, q):
 
-    cap = open_cam()
+        # Server로 넘기는 XML 데이터중 SystemByte 값
+        #  - 한번 보낼때마다 1씩 증가해야함
+        #SystemByteResult = SystemBytePlus()
+
+        # Server로 온,습도 값 전송
+        #Send_s6f11_TempHumid(SystemByteResult, temp, hum)
+    
+def image_process(cap, ser, q, state_flag, state_list):
+    goods_x, signal, barcode = cam(cap)
+
+    # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
+    if signal == 'P' and (goods_x >= 60 and goods_x <= 260):    
+        if state_flag == "SEND_STOP":   # 상태가 STOP 일때
+            command_arduino(ser, 1)
+            state_flag = "SEND_GRAB"    # 상태 GRAB
+            
+        if state_flag == "SEND_GRAB"  and len(barcode) > 5:
+            sleep(0.01)
+            command_arduino(ser, 2)
+            state_flag = "WAIT"
+            
+    # 받은 신호가 F(레드) 일때, 카메라가 레드 제품을 확인하고 컨베이어 벨트를 멈추는 범위
+    elif signal == 'F' and (goods_x >= 20 and goods_x <= 200):
+        if state_flag == "SEND_STOP":
+            command_arduino(ser, 1)
+            state_flag = "SEND_GRAB"
+
+        if state_flag == "SEND_GRAB"  and len(barcode) > 5:
+            sleep(0.01)
+            command_arduino(ser, 3)
+            state_flag = "WAIT"
+            
+    else:
+        if q.empty() == False and signal == 'N':
+            rx_data = q.get()
+            print(rx_data)
+            if rx_data == "complete":
+                command_arduino(ser, 0)
+                state_flag = "SEND_STOP"
+    return state_flag
+
+
+def main_process(ser, q):
+    state_list = ["WAIT", "SEND_STOP", "SEND_GRAB" ]
+    cap = open_cam()    # 카메라 open
     command_arduino(ser, 0)
-    state_flag = 1
+    state_flag = state_list[1]
+    q.put("start")
+    
     sleep(1)
     
     while True:
-        goods_x, signal, barcode = cam(cap)
-        
-        if signal == 'P' and (goods_x >= 50 and goods_x <= 302):
-            if state_flag == 1:
-                command_arduino(ser, 1)
-                state_flag = 2
-            if len(barcode) > 5 and state_flag == 2:
-                sleep(0.01)
-                command_arduino(ser, 2)
-                state_flag = 0
-                
-        elif signal == 'F' and (goods_x >= 50 and goods_x <= 302):
-            if state_flag == 1:
-                command_arduino(ser, 1)
-                state_flag = 2
-            if len(barcode) > 5 and state_flag == 2:
-                sleep(0.01)
-                
-        else:
-            if q.empty() == False and signal == 'N':
-                rx_data = q.get()
-                print(rx_data)
-                if rx_data == "complete":
-                    command_arduino(ser, 0)
-                    state_flag = 1
-                    
+        state_flag = image_process(cap, ser, q, state_flag, state_list)    
         if cv.waitKey(1) & 0xFF == 27:
             break 
-        
-        get_H_T()
-            
     cap.release()
     cv.destroyAllWindows()  
 
 def serve_process(ser, q):
     while True:
         receive_arduino(ser, q)
+    
+# 온습도 받는 process
+def temp_huminity_process(q):
+    factory_state = ""
+    temp_state = 1
+    
+    while True:
+        if q.empty() == False and temp_state == 1:
+            factory_state = q.get()
+            temp_state = 2
         
-        
+        if factory_state == "start" and temp_state == 2:
+            get_H_T()
+
 try:
     if __name__ == "__main__":
-        SystemByte = [0, 0, 0, 0, 0]
         print("start \n")
         q = Queue()
         ser = serial_open()
         p1 = Process(target = main_process, args = (ser,q))
         p2 = Process(target = serve_process, args = (ser,q))
+        p3 = Process(target = temp_huminity_process, args = (q, ))
         p1.start()
         p2.start()
-
+        p3.start()
+        
 except KeyboardInterrupt:
     print("exit() \n")
     p1.join()
     p2.join()
-
+    p3.join()

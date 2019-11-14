@@ -125,6 +125,7 @@ String Rec_data()
 // 좌측 바구니 
 void left_basket_op()
 {
+  // 좌측 바구니 비우기(100도 회전)
   for(angle = 180; angle >= 80; angle--) 
   { 
     servo3.write(angle); 
@@ -133,6 +134,7 @@ void left_basket_op()
 
   delay(1000);
 
+  // 좌측 바구니를 비운 상태에서 원위치
   for(angle = 80; angle <= 180; angle++) 
   { 
     servo3.write(angle); 
@@ -140,8 +142,10 @@ void left_basket_op()
   }
 }
 
+// 우측 바구니
 void right_basket_op()
 {
+  // 우측 바구니 비우기(100도 회전)
   for(angle = 0; angle <= 100; angle++) 
   { 
     servo4.write(angle); 
@@ -150,16 +154,18 @@ void right_basket_op()
 
   delay(1000);
 
+  // 우측 바구니를 비운 상태에서 원위치
   for(angle = 100; angle >= 0; angle--) 
   { 
     servo4.write(angle); 
-    delay(25); 
+    delay(15); 
   }
 }
 
-// 로봇팔 접은상태 -> 펴기
+// 로봇팔 접은상태 -> 펴기(초기 상태로)
 void open_teol()
 {
+  // 로봇팔 초기값 - 180도
   for(angle = 0; angle <= 180; angle++) 
   { 
     servo2.write(angle); 
@@ -167,9 +173,10 @@ void open_teol()
   } 
 }
 
-// 로봇팔 접는거
+// 로봇팔 편상태(초기 상태) -> 접은상태
 void close_teol()
 {
+  // 로봇팔 초기 - 180도
   for(angle = 180; angle >= 0; angle--) 
   { 
     servo2.write(angle); 
@@ -180,53 +187,53 @@ void close_teol()
 // 정상 잡는 함수
 void Grab_Regular_object()
 {
-  close_teol(); // 로봇팔 접고
+  close_teol(); // 로봇팔 접기
   delay(100);
-  servo1.write(0);  // 로봇팔 회전해주는거 왼쪽
+  servo1.write(0);  // 로봇팔 회전(왼쪽)
   delay(100);
-  open_teol();  // 로봇팔 펴고
+  open_teol();  // 로봇팔 펴기
   delay(100);  
-  servo1.write(90); // 로봇팔 회전해주는거 원래위치
+  servo1.write(90); // 로봇팔 회전(원위치)
 }
 
 // 불량 잡는 함수(정상 잡는 함수와 반대)
 void Grab_Inferior_object()
 {
-  close_teol();
+  close_teol(); // 로봇팔 접기
   delay(100);
-  servo1.write(180);
+  servo1.write(180);  // 로봇팔 회전(오른쪽)
   delay(100);
-  open_teol();
+  open_teol();  // 로봇팔 펴기
   delay(100);  
-  servo1.write(90);
+  servo1.write(90); // 로봇팔 회전(원위치)
 }
 
 // 우측 바구니 담는거
 void Input_Right_Basket()
 {
-  rack_forward(); // 피니언 움직이는 함수 - rack_~~()
+  rack_forward(); // 피니언을 박스담는 쪽으로 움직이는 함수
   delay(100);
-  rack_stop();
+  rack_stop();    // 피니언 정지
   delay(100);
-  right_basket_op();
+  right_basket_op();  // 우측 바구니 비운 후 원위치
   delay(100); 
-  rack_backward();
+  rack_backward();  // 피니언 컨베이어 벨트로 원위치
   delay(100);
-  rack_stop();
+  rack_stop();    // 피니언 정지
 }
 
 // 좌측 바구니 담는거
 void Input_Left_Basket()
 {
-  rack_forward();
+  rack_forward(); // 피니언을 박스담는 쪽으로 움직이는 함수
   delay(100);
-  rack_stop();
+  rack_stop();    // 피니언 정지
   delay(100);
-  left_basket_op();
+  left_basket_op(); // 좌측 바구니 비운 후 원위치
   delay(100); 
-  rack_backward();
+  rack_backward();  // 피니언 컨베이어 벨트로 원위치
   delay(100);
-  rack_stop();
+  rack_stop();    // 피니언 정지
 }
 
 // 피니언 움직이는 함수(박스 쪽으로)
@@ -234,19 +241,20 @@ void rack_forward()
 {
   digitalWrite(IN3, 1); // 2번
   digitalWrite(IN4, 0); // 4번
-  analogWrite(EN2, 30);
-  delay(4500);
+  analogWrite(EN2, 35); // 11번
+  delay(4800);
 }
 
 // 피니언 움직이는 함수(컨베이어 벨트쪽으로)
 void rack_backward()
 {
-  digitalWrite(IN3, 0);
-  digitalWrite(IN4, 1);
-  analogWrite(EN2, 30);
-  delay(4500);
+  digitalWrite(IN3, 0); // 2번
+  digitalWrite(IN4, 1); // 4번
+  analogWrite(EN2, 35); // 11번
+  delay(4600);
 }
 
+// 피니언 정지
 void rack_stop()
 {
   digitalWrite(IN3, 0);
@@ -257,15 +265,15 @@ void rack_stop()
 // 컨베이어벨트 동작(0, 1 = 정방향, 53 = 속도)
 void conveyer_dc_op()
 {
-  digitalWrite(IN1, 0);
-  digitalWrite(IN2, 1);
-  analogWrite(EN1, 53);
+  digitalWrite(IN1, 0); // 12번
+  digitalWrite(IN2, 1); // 13번
+  analogWrite(EN1, 53); // 3번
 }
 
 // 컨베이어벨트 정지
 void conveyer_dc_st()
 {
-  digitalWrite(IN1, 0);
-  digitalWrite(IN2, 0);
-  analogWrite(EN1, 0);
+  digitalWrite(IN1, 0); // 12번
+  digitalWrite(IN2, 0); // 13번
+  analogWrite(EN1, 0);  // 3번
 }

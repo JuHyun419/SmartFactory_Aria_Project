@@ -2,7 +2,8 @@
 qr코드
 제품 고유번호
 모델 이름
-라인 번호 - L#3
+모델 온도
+모델 습도
 
 01 02 03 04 05 (파랑) - 정상품 고유번호
 10 20 30 40 50 (빨강) - 정상품 고유번호
@@ -10,11 +11,14 @@ qr코드
 아리아크림빵 파랑 전부 다 아리아 크림빵
 빨강은 3개는 아리아크림빵 2개는 아리아메론빵
 
+string temp string humid
+
+
 
 {{제품고유번호,모델이름,모델온도,모델습도}}
 
-{{product_number,model_name,Line_Number}}
-******* QR 코드 정의 끝*********
+{{product_number,model_name,model_temp,model_humid}}
+*******qr코드 정의 끝*********
 
 *********CEID LIST xml 양식************
 

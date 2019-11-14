@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np  # 배열을 처리하는데 필요한 라이브러리
 from multiprocessing import Queue, Process
-from pyzbar import pyzbar
+from pyzbar import pyzbar   # 바코드, QR코드 읽는 라이브러리
 
 CAM_ID = 0
 CAM_WIDTH = 352  #480
@@ -70,17 +70,22 @@ def image_filter(frame):
     return dilate_blue_image, dilate_red_image 
 
 def detect_goods(filter_blue_image, filter_red_image, frame):
+
+    # Contour - 같은 값을 가진 곳을 연결한 선
     contours_blue = cv.findContours(filter_blue_image.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)[-2]
     contours_red = cv.findContours(filter_red_image.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)[-2]
     
+    # 파랑색 제품
     if len(contours_blue) > 0:
         c = max(contours_blue, key=cv.contourArea)
         signal = 'P'    
         
+    # 빨간색 제품
     elif len(contours_red) > 0:
         c = max(contours_red, key=cv.contourArea)
         signal = 'F'
     
+    # 제품이 없을때
     else:
         signal = 'N'
         #print("no goods ! signal: N \n\n")
@@ -102,30 +107,41 @@ def detect_goods(filter_blue_image, filter_red_image, frame):
         return x, signal, data, frame
     
     else:
-        #print("circle is too small \n\n")  #섹제섹제김섹제 하앍섹제 하앍아락 기모찌 데벳제벳 하하하(ㅗㅗㅗㅗ)
-
         x = -1
         y = -1
         data = ""
         return x, signal, data, frame
 
+# 바코드 찾고 읽는 함수
 def read_barcode(frame):
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    decoded = pyzbar.decode(gray)
+
+    # 이미지에서 바코드를 찾고 각 바코드를 디코드한다.
+    decoded = pyzbar.decode(gray)   
     barcode_data = ""
     
     if len(decoded) > 0:
+
+        # 검출한 바코드를 위한 루프
         for d in decoded: 
+
+            # 바코드의 영역을 추출하고 영역 그리기
+            # 이미지의 바코드 주변에 박스를 그림
             x, y, w, h = d.rect
 
-            barcode_data = d.data.decode("utf-8")
+            # 바코드 데이터는 바이트 객체이므로 이미지에 그리려면 문자열로 변환해야함
+            barcode_data = d.data.decode("utf-8")   # .decode("utf-8") : byte -> 문자열 변환 
             barcode_type = d.type
+
+            # 바코드 데이터와 타입을 이미지에 그림
             text = '%s (%s)' % (barcode_data, barcode_type)
             cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
+            print(text)
+            print('--------------------')
+            print(barcode_data)
             
             return barcode_data, frame
-    
     else:
         return barcode_data, frame    
 
@@ -138,8 +154,11 @@ def cam(cap):
     (filter_blue_image, filter_red_image) = image_filter(frame)
     
     x, signal, data, frame = detect_goods(filter_blue_image, filter_red_image, frame)
+
+    # rectangle() : 사각형 그려주는 함수
     cv.rectangle(frame, (50, 0), (302, 288), (0, 0, 255), 2)
     
+    # imshow() : 이미지를 사이즈에 맞게 보여줌
     cv.imshow('frame', frame)
     cv.imshow('filter_blue_mask', filter_blue_image)
     cv.imshow('filter_red_mask', filter_red_image)

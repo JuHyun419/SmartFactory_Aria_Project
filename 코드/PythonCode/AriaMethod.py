@@ -3,7 +3,6 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree, dump
 from socket import *
 import xml.etree.ElementTree as ET
 
-
 # 보기 좋게 XML 만드는 함수, 줄바꿈, 들여쓰기 작업
 def indent(elem, level=0): #자료 출처 https://goo.gl/J8VoDK
     i = "\n" + level*"  "

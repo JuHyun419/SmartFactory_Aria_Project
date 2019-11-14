@@ -1,0 +1,7 @@
+참고 사이트
+QR코드, 바코드 
+ https://m.blog.naver.com/PostView.nhn?blogId=heennavi1004&logNo=221526683132&proxyReferer=https%3A%2F%2Fwww.google.com%2F
+
+파이썬 API
+ https://docs.python.org/3.7/library/index.html
+
