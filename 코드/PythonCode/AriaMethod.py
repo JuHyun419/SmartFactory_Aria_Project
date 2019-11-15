@@ -3,6 +3,7 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree, dump
 from socket import *
 import xml.etree.ElementTree as ET
 
+
 # 보기 좋게 XML 만드는 함수, 줄바꿈, 들여쓰기 작업
 def indent(elem, level=0): #자료 출처 https://goo.gl/J8VoDK
     i = "\n" + level*"  "
@@ -27,24 +28,44 @@ def connToServer(ServerIP, Port):
     return clientSock
 
 
-# Server -> PI  XML 형식으로 데이터를 받는 함수(S2F41)
-def Receive_s2f41():
-    clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
-    data = clientSock.recv(1024)
-    print("받은 데이터 : ", data.decode('utf-8'))
-    tree = ET.parse('C:/Temp/AriaTest002.xml')
-    HEAD = tree.find('./HEAD')          # HEAD를 검색한 후 마침
-    Stream = HEAD.find('Stream')        # HEAD 루트노드중 Stream 찾기
-    Function = HEAD.find('Function')    # HEAD 루트노드중 Function 찾기
+# XML 형식의 문자열
+_recvData = '''
+<SECS2_XML_MESSAGE><HEAD><SystemByte>00001</SystemByte><CMD>LOT_START</CMD>
+<Stream>2</Stream><Function>41</Function></HEAD><BODY>
+<Model_name>아리아크림빵</Model_name><Prod_count>10</Prod_count><Model_temp>19</Model_temp>
+<Model_humid>21</Model_humid>
+<Color>Blue</Color></BODY></SECS2_XML_MESSAGE>
+'''
 
-    BODY = tree.find('./BODY')  # BODY를 검색
-    RCMD = BODY.find('RCMD')    # BODY 루트노드중 RCMD 찾기
-    return Stream, Function, RCMD
+
+## 문자열 -> Xml 객체로 파싱하는 함수
+def Receive_s2f41(recvData):
+    tree = ET.fromstring(recvData)   # 문자열 -> Xml 객체
+    indent(tree)    # Xml을 보기좋게 만드는 함수
+    BODY = tree.find('./BODY')  # XML에서 BODY 루트 찾기
+
+    # BODY 노드에서 각 루트 찾기
+    Model_name = BODY.find('Model_name')
+    Prod_count = BODY.find('Prod_count')
+    Model_temp = BODY.find('Model_temp')
+    Model_humid = BODY.find('Model_humid')
+    Color = BODY.find('Color')
+    
+    # Element 형식을 str으로 형변환 해서 리턴
+    return str(Model_name.text), str(Prod_count.text), str(Model_temp.text), str(Model_humid.text), str(Color.text)
+
+#Model_name, Prod_count, Model_temp, Model_humid, Color = Receive_s2f41(_recvData)
+
+# print(Model_name)
+# print(Prod_count)
+# print(Model_temp)
+# print(Model_humid)
+# print(Color)
 
 
 # PI -> Server  작업지시에 대한 응답
-def Send_s2f42(SystemByteResult, _Hcack):
-    clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
+def Send_s2f42(ServerIP, Port, SystemByteResult):
+    clientSock = connToServer(ServerIP, Port) # 서버에 접속
     root = Element("SECS2_XML_MESSAGE")
 
     ## HEAD
@@ -56,7 +77,7 @@ def Send_s2f42(SystemByteResult, _Hcack):
 
     ## BODY
     body = SubElement(root, "BODY")
-    SubElement(body, "HCACK").text = str(_Hcack)
+    SubElement(body, "HCACK").text = "0"
 
     # XML 형식을 bytes로 변환
     data = ET.tostring(root, encoding='utf-8', method='xml')
@@ -262,3 +283,4 @@ def Send_s6f11_TempHumid(SystemByteResult, Temp, Humid):
      #indent(root)
      data = ET.tostring(root, encoding='utf-8', method='xml')
      clientSock.send(data)    # Server로 데이터 전송
+

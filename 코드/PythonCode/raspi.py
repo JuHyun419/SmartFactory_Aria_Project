@@ -1,9 +1,12 @@
 import serial   # 아두이노 통신 라이브러리
-from time import *  
+from time import * 
 from multiprocessing import Queue, Process
 from import_detect import * # import_detect.py 파일 불러옴
 import Adafruit_DHT         # 온습도 관련 라이브러리
 from AriaMethod import *    # AriaMethod.py 파일 불러옴
+
+import threading
+import time as time1
 
 BAUDRATE = 9600
 time_flag = 0
@@ -11,7 +14,7 @@ last_time = 0
 
 # SystemBytePlus() 함수에서 사용될 문자열, 리스트
 SystemByteResult = ""
-SystemByte = [0, 0, 0, 0, 0]
+SystemByte = [0, 0, 0, 0, 1]
 
 sensor = Adafruit_DHT.DHT11
 pin = '4'
@@ -101,18 +104,18 @@ def image_process(cap, ser, q, state_flag, state_list):
     goods_x, signal, barcode = cam(cap)
 
     # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
-    if signal == 'P' and (goods_x >= 60 and goods_x <= 260):    
+    if signal == 'P' and (goods_x >= 5 and goods_x <= 260):    
         if state_flag == "SEND_STOP":   # 상태가 STOP 일때
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"    # 상태 GRAB
-            
+
         if state_flag == "SEND_GRAB"  and len(barcode) > 5:
             sleep(0.01)
             command_arduino(ser, 2)
             state_flag = "WAIT"
             
     # 받은 신호가 F(레드) 일때, 카메라가 레드 제품을 확인하고 컨베이어 벨트를 멈추는 범위
-    elif signal == 'F' and (goods_x >= 20 and goods_x <= 200):
+    elif signal == 'F' and (goods_x >= 5 and goods_x <= 260):
         if state_flag == "SEND_STOP":
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"
@@ -168,6 +171,32 @@ def temp_huminity_process(q):
 try:
     if __name__ == "__main__":
         print("start \n")
+        
+        # ----------------------------------------------------------
+        # while True:
+        #     clientSock = connToServer("220.69.249.226", 4000)   # Server에 접속
+        #     clientSock.send("value = ?".encode('utf-8'))    # encode() - 문자열을 byte로 변환
+        #     data = clientSock.recv(1024)    # 서버로부터 데이터 받음
+        #     print('받은 데이터 : ', data.decode('utf-8'))   # decode() - byte를 문자열로 변환
+        #     recvData = data.decode('utf-8') # Server로 부터 받은 byte를 문자열로 변환
+
+        #     # Server로 부터 받은 데이터가 false가 아닐때,
+        #     # 실직적으로 공장 시작되는 시점
+        #     if recvData != 'false':
+
+        #         # Server로 부터 받은 데이터중 필요한 데이터를 뽑아냄
+        #         Model_name, Prod_count, Model_temp, Model_humid, Color = Receive_s2f41(recvData)
+
+        #         # 명령 보낼때마다 1씩 증가
+        #         SystemByteResult = SystemBytePlus()
+
+        #         # Server에게 작업 지시에 대한 응답 전송
+        #         Send_s2f42("220.69.249.226", 4000, SystemByteResult)
+        #         print(Model_name, Prod_count, Model_temp, Model_humid, Color)
+        #         break
+        #     time1.sleep(2)  # 2초 딜레이
+        # # ----------------------------------------------------------
+        
         q = Queue()
         ser = serial_open()
         p1 = Process(target = main_process, args = (ser,q))

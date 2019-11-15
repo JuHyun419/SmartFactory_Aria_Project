@@ -27,7 +27,3 @@ print('메시지를 보냈습니다.')
 
 print(type(str(data)))
 str_data = str(data)
-
-tree = ET.fromstring(str_data)
-note = tree.getroot()   # root 태그 받아옴 
-print(note)

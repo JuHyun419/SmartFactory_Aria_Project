@@ -1,28 +1,44 @@
 *******qr코드 정의********
 qr코드
-제품 고유번호
-모델 이름
-모델 온도
-모델 습도
+
+제품 고유번호 - 01, 02, 03, 04, 05, 10, 20, 30, 40, 50
+모델 이름 - 아리아크림빵
+라인
 
 01 02 03 04 05 (파랑) - 정상품 고유번호
 10 20 30 40 50 (빨강) - 정상품 고유번호
 
-아리아크림빵 파랑 전부 다 아리아 크림빵
-빨강은 3개는 아리아크림빵 2개는 아리아메론빵
+{{제품고유번호,모델이름,라인}}
 
-string temp string humid
+{{product_number,model_name,Line}}
 
+라인은 전부 L#3로 통일
 
-
-{{제품고유번호,모델이름,모델온도,모델습도}}
-
-{{product_number,model_name,model_temp,model_humid}}
 *******qr코드 정의 끝*********
+
+*****S2F41*****
+  <SECS2_XML_MESSAGE> // 클라이언트 -> 서버 -> pi
+    <HEAD>
+      <SystemByte> 00001 </SystemByte>
+      <CMD> LOT_START </CMD>
+      <Stream> 2 </Stream>
+      <Function> 41 </Function>
+    </HEAD>
+    <BODY>
+      <Lot_id> 아리아크림빵10개 </Lot_id>
+      <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
+      <Prod_count> 10 </Prod_count>
+      <Model_temp> 15.5 </Model_temp>
+      <Model_humid> 40.6 </Model_humid>
+      <Line> L#3 </Line>
+      <Color> Blue, Green, Red, Black <Color>
+    </BODY>
+  </SECS2_XML_MESSAGE>
 
 *********CEID LIST xml 양식************
 
 *******CEID1********
+   // PI -> Server
   <SECS2_XML_MESSAGE>
     <HEAD>
       <SystemByte> 00002 </SystemByte>
@@ -43,7 +59,7 @@ string temp string humid
             <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
             <Model_temp> 15.5 </Model_temp>
 	<Model_humid> 40.6 </Model_humid>
-	<Color> "Blue" or "Red" <Color>
+	<Result> "Ok" or "No" </Result>
 	<Fail_reason> reason </Fail_reason>
 	<QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
 	<CV_move_state> 임의값 </CV_move_state>
@@ -53,6 +69,7 @@ string temp string humid
       </REPORTS>
     </BODY>
   </SECS2_XML_MESSAGE>
+
 
 *******CEID2********
   <SECS2_XML_MESSAGE>

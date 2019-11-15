@@ -2,6 +2,7 @@ import cv2 as cv
 import numpy as np  # 배열을 처리하는데 필요한 라이브러리
 from multiprocessing import Queue, Process
 from pyzbar import pyzbar   # 바코드, QR코드 읽는 라이브러리
+from AriaMethod import *    # AriaMethod.py 파일 불러옴
 
 CAM_ID = 0
 CAM_WIDTH = 352  #480
@@ -15,8 +16,11 @@ lower_blue = np.array([90, 171, 149])
 upper_blue = np.array([120,255,255])
 
 # red 영역의 from ~ to
-lower_red = np.array([160, 50, 212])
-upper_red = np.array([179, 255, 255])
+lower_red1 = np.array([0, 14, 220]) 
+upper_red1 = np.array([9, 255, 255])
+
+lower_red2 = np.array([0, 97, 214]) 
+upper_red2 = np.array([14, 255, 255])
 
 # 카메라 실행
 def open_cam(camera = CAM_ID):
@@ -50,8 +54,10 @@ def image_filter(frame):
 
     # 이미지에서 blue, red 영역
     mask_blue = cv.inRange(hsv_blue, lower_blue, upper_blue)
-    mask_red = cv.inRange(hsv_red, lower_red, upper_red)
-    
+    mask_red1 = cv.inRange(hsv_red, lower_red1, upper_red1)
+    mask_red2 = cv.inRange(hsv_red, lower_red2, upper_red2)
+    mask_red = cv.bitwise_or( mask_red1, mask_red2)
+
     # 이미지 형태전환(?)
     # erode - 침식
     #         전경이 되는 이미지의 경계부분을 침식시켜 배경 이미지로 전환
@@ -137,9 +143,18 @@ def read_barcode(frame):
             text = '%s (%s)' % (barcode_data, barcode_type)
             cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
-            print(text)
-            print('--------------------')
-            print(barcode_data)
+
+            # for i in range(1):
+
+            #     # Server에 접속
+            #     clientSock = connToServer("220.69.249.226", 4000)
+            #     print("---------- barcode_data ----------")
+            #     print(barcode_data)
+
+            #     # Server에 QR코드 전송
+            #     # encode() : 문자열 -> Byte 변환
+            #     clientSock.send(str(barcode_data).encode('utf-8'))
+            #     print("----------------------------------")
             
             return barcode_data, frame
     else:
