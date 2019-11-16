@@ -39,6 +39,11 @@ _recvData = '''
 
 
 ## 문자열 -> Xml 객체로 파싱하는 함수
+# Model_name  : 아리아크림빵,
+# Prod_count  : 상품 개수
+# Model_temp  : 상품 적정 온도
+# Model_humid : 상품 적정 습도
+# Color       : 상품 색상
 def Receive_s2f41(recvData):
     tree = ET.fromstring(recvData)   # 문자열 -> Xml 객체
     indent(tree)    # Xml을 보기좋게 만드는 함수
@@ -54,18 +59,11 @@ def Receive_s2f41(recvData):
     # Element 형식을 str으로 형변환 해서 리턴
     return str(Model_name.text), str(Prod_count.text), str(Model_temp.text), str(Model_humid.text), str(Color.text)
 
-#Model_name, Prod_count, Model_temp, Model_humid, Color = Receive_s2f41(_recvData)
-
-# print(Model_name)
-# print(Prod_count)
-# print(Model_temp)
-# print(Model_humid)
-# print(Color)
-
 
 # PI -> Server  작업지시에 대한 응답
 def Send_s2f42(ServerIP, Port, SystemByteResult):
-    clientSock = connToServer(ServerIP, Port) # 서버에 접속
+    clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
+    # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
     root = Element("SECS2_XML_MESSAGE")
 
     ## HEAD
@@ -121,7 +119,8 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 
 # PI -> Server  1개의 제품 생산 완료 전송(CEID = 1)
 def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp, Model_humid, Color, Fail_reason, QRCode):
-     clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
+     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
+     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -181,7 +180,8 @@ def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp
 
 # PI -> Server  Lot 작업 시작 전송(CEID = 2)
 def Send_s6f11_Lot_Start(SystemByteResult):
-     clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
+     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
+     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -207,7 +207,8 @@ def Send_s6f11_Lot_Start(SystemByteResult):
 
 # PI -> Server  Lot 명령에 대한 모든 제품을 생산 완료함(CEID = 3)
 def Send_s6f11_Lot_Complete(SystemByteResult):
-     clientSock = connToServer("127.0.0.1", 8099) # 서버에 접속
+     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
+     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -257,8 +258,8 @@ def Send_s6f11_Lot_Complete(SystemByteResult):
 
 ## PI -> Server  라인 환경 정보 업데이트(온습도, CEID = 4)
 def Send_s6f11_TempHumid(SystemByteResult, Temp, Humid):
-     #clientSock = connToServer("220.69.249.231", 8099) # 서버에 접속
-     clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
+     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD

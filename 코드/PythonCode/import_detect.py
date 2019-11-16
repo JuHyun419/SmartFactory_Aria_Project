@@ -10,6 +10,7 @@ CAM_HEIGHT = 288 #320
 
 signal = 'N'
 data = ""
+flag = 1
 
 # blue 영역의 from ~ to
 lower_blue = np.array([90, 171, 149])
@@ -123,6 +124,9 @@ def detect_goods(filter_blue_image, filter_red_image, frame):
 def read_barcode(frame):
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
+    # 전역변수 설정
+    global flag
+    
     # 이미지에서 바코드를 찾고 각 바코드를 디코드한다.
     decoded = pyzbar.decode(gray)   
     barcode_data = ""
@@ -145,17 +149,21 @@ def read_barcode(frame):
             cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
 
-            # for i in range(1):
+            if(flag == 1):
+                # Server에 접속
+                clientSock = connToServer("220.69.249.231", 4000)
+                print("---------- barcode_data ----------")
+                print(barcode_data)
 
-            #     # Server에 접속
-            #     clientSock = connToServer("220.69.249.226", 4000)
-            #     print("---------- barcode_data ----------")
-            #     print(barcode_data)
+                # Aria 프로토콜 정의
+                # {{product_number, model_name, Line}}
+                aria_barcode_data = "{{" + barcode_data + "}}"
 
-            #     # Server에 QR코드 전송
-            #     # encode() : 문자열 -> Byte 변환
-            #     clientSock.send(str(barcode_data).encode('utf-8'))
-            #     print("----------------------------------")
+                # Server에 QR코드 전송
+                # encode() : 문자열 -> Byte 변환2
+                clientSock.send(aria_barcode_data.encode('utf-8'))
+                print("----------------------------------")
+                flag -= 1   # 전역변수 flag값을 감소시켜 다음에 함수가 실행되도 if문 실행 X
             
             return barcode_data, frame
     else:

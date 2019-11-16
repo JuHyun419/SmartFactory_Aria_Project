@@ -1,5 +1,5 @@
 import serial   # 아두이노 통신 라이브러리
-from time import * 
+from time import *  
 from multiprocessing import Queue, Process
 from import_detect import * # import_detect.py 파일 불러옴
 import Adafruit_DHT         # 온습도 관련 라이브러리
@@ -18,7 +18,6 @@ SystemByte = [0, 0, 0, 0, 1]
 
 sensor = Adafruit_DHT.DHT11
 pin = '4'
-
 
 # 00001 부터 1씩 증가하는 함수
 def SystemBytePlus():
@@ -57,7 +56,7 @@ def humanity_temp():
         temperature = 0 
         humidity = 0 
         return temperature, humidity   # 온습도 0으로 초기화 후 리턴
-    
+
 # 시리얼 객체 생성(open) - 아두이노 통신
 def serial_open():
     ser = serial.Serial('/dev/ttyAMA0', baudrate = BAUDRATE)
@@ -88,24 +87,26 @@ def get_H_T():
         time_flag = 1
     
     # 10초 간격 온습도 출력
-    if time() - last_time >= 10:
+    if time() - last_time >= 7:
         temp, hum = humanity_temp()
         time_flag = 0
         print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
 
         # Server로 넘기는 XML 데이터중 SystemByte 값
         #  - 한번 보낼때마다 1씩 증가해야함
-        #SystemByteResult = SystemBytePlus()
+        SystemByteResult = SystemBytePlus()
 
         # Server로 온,습도 값 전송
-        #Send_s6f11_TempHumid(SystemByteResult, temp, hum)
+        Send_s6f11_TempHumid(SystemByteResult, temp, hum)
     
 def image_process(cap, ser, q, state_flag, state_list):
     goods_x, signal, barcode = cam(cap)
 
     # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
-    if signal == 'P' and (goods_x >= 5 and goods_x <= 260):    
+    if signal == 'P' and (goods_x >= 5 and goods_x <= 260):
+        print("블루에용~~~")    
         if state_flag == "SEND_STOP":   # 상태가 STOP 일때
+            print("블루 - SEND_STOP 이에용 ~~~")
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"    # 상태 GRAB
 
@@ -116,7 +117,9 @@ def image_process(cap, ser, q, state_flag, state_list):
             
     # 받은 신호가 F(레드) 일때, 카메라가 레드 제품을 확인하고 컨베이어 벨트를 멈추는 범위
     elif signal == 'F' and (goods_x >= 5 and goods_x <= 260):
+        print("레드에용~~~")
         if state_flag == "SEND_STOP":
+            print("레드 - SEND_STOP 이에용 ~~~")
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"
 
@@ -159,7 +162,7 @@ def serve_process(ser, q):
 def temp_huminity_process(q):
     factory_state = ""
     temp_state = 1
-    
+
     while True:
         if q.empty() == False and temp_state == 1:
             factory_state = q.get()
@@ -183,19 +186,28 @@ try:
         #     # Server로 부터 받은 데이터가 false가 아닐때,
         #     # 실직적으로 공장 시작되는 시점
         #     if recvData != 'false':
-
         #         # Server로 부터 받은 데이터중 필요한 데이터를 뽑아냄
+        #         # Model_name  : 아리아크림빵,
+        #         # Prod_count  : 상품 개수
+        #         # Model_temp  : 상품 적정 온도
+        #         # Model_humid : 상품 적정 습도
+        #         # Color       : 상품 색상
         #         Model_name, Prod_count, Model_temp, Model_humid, Color = Receive_s2f41(recvData)
-
+        #         print("------------------------------")
+        #         now = time1.localtime()
+        #         print ("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+        #         print("MES Server로 부터 명령을 받았습니다.")
+        #         print("------------------------------")
+                  
         #         # 명령 보낼때마다 1씩 증가
         #         SystemByteResult = SystemBytePlus()
 
         #         # Server에게 작업 지시에 대한 응답 전송
-        #         Send_s2f42("220.69.249.226", 4000, SystemByteResult)
+        #         Send_s2f42(SystemByteResult)
         #         print(Model_name, Prod_count, Model_temp, Model_humid, Color)
         #         break
         #     time1.sleep(2)  # 2초 딜레이
-        # # ----------------------------------------------------------
+        # ----------------------------------------------------------
         
         q = Queue()
         ser = serial_open()

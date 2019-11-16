@@ -267,7 +267,7 @@ void conveyer_dc_op()
 {
   digitalWrite(IN1, 0); // 12번
   digitalWrite(IN2, 1); // 13번
-  analogWrite(EN1, 50); // 3번
+  analogWrite(EN1, 51); // 3번
 }
 
 // 컨베이어벨트 정지 함수
