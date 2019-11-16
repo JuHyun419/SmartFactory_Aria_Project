@@ -75,6 +75,7 @@ def image_filter(frame):
     
     return dilate_blue_image, dilate_red_image 
 
+# 제품 찾는 함수
 def detect_goods(filter_blue_image, filter_red_image, frame):
 
     # Contour - 같은 값을 가진 곳을 연결한 선
@@ -161,13 +162,9 @@ def read_barcode(frame):
         return barcode_data, frame    
 
 def cam(cap):
-    
     frame = cam_streaming(cap)
-
     frame = cv.GaussianBlur(frame, (1, 1), 0)
-    
     (filter_blue_image, filter_red_image) = image_filter(frame)
-    
     x, signal, data, frame = detect_goods(filter_blue_image, filter_red_image, frame)
 
     # rectangle() : 사각형 그려주는 함수
@@ -177,5 +174,4 @@ def cam(cap):
     cv.imshow('frame', frame)
     cv.imshow('filter_blue_mask', filter_blue_image)
     cv.imshow('filter_red_mask', filter_red_image)
-    
-    return x, signal, data        
+    return x, signal, data 
