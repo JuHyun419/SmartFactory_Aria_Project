@@ -57,11 +57,10 @@ qr코드
             <!-- 사전에 약속된 값을 전달 한다. -->
             <Product_number> 01,02,10,20 </Product_number>
             <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
-            <Model_temp> 15.5 </Model_temp>
-	<Model_humid> 40.6 </Model_humid>
-	<Result> "Ok" or "No" </Result>
+            //<Model_temp> 15.5 </Model_temp>
+	//<Model_humid> 40.6 </Model_humid>
+	<Result> "Pass" OR "Fail" </Result>
 	<Fail_reason> reason </Fail_reason>
-	<QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
 	<CV_move_state> 임의값 </CV_move_state>
 	<Robot_gripper_state> 임의값 </Robot_gripper_state>
           </VARIABLES>

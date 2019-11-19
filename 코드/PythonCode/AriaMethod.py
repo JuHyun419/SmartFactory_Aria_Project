@@ -52,18 +52,17 @@ def Receive_s2f41(recvData):
     # BODY 노드에서 각 루트 찾기
     Model_name = BODY.find('Model_name')
     Prod_count = BODY.find('Prod_count')
-    Model_temp = BODY.find('Model_temp')
-    Model_humid = BODY.find('Model_humid')
+    # Model_temp = BODY.find('Model_temp')
+    # Model_humid = BODY.find('Model_humid')
     Color = BODY.find('Color')
     
     # Element 형식을 str으로 형변환 해서 리턴
-    return str(Model_name.text), str(Prod_count.text), str(Model_temp.text), str(Model_humid.text), str(Color.text)
+    return str(Model_name.text), str(Prod_count.text), str(Color.text)
 
 
 # PI -> Server  작업지시에 대한 응답
 def Send_s2f42(ServerIP, Port, SystemByteResult):
-    clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
-    # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+    clientSock = connToServer(ServerIP, Port) # 서버에 접속
     root = Element("SECS2_XML_MESSAGE")
 
     ## HEAD
@@ -103,8 +102,6 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 #           <VARIABLES>
 #            <Product_number> 01, 02, 10, 20, ... </Product_number>
 #            <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
-#            <Model_temp> 15.5 </Model_temp>
-#	         <Model_humid> 40.6 </Model_humid>
 #	         <Color> "Blue" or "Red" <Color>
 #        	 <Fail_reason> reason </Fail_reason>
 #	         <QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
@@ -118,9 +115,8 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 # -----------------------------------------------------------------
 
 # PI -> Server  1개의 제품 생산 완료 전송(CEID = 1)
-def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp, Model_humid, Color, Fail_reason, QRCode):
-     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
-     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+def Send_s6f11_Complete(ServerIP, Port, SystemByteResult, Product_number, Model_name, Color, Fail_reason, QRCode):
+     clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -141,8 +137,6 @@ def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp
      variables = SubElement(report, "VARIABLES")
      SubElement(variables, "Product_number").text = str(Product_number)
      SubElement(variables, "Model_name").text = str(Model_name)
-     SubElement(variables, "Model_temp").text = str(Model_temp)
-     SubElement(variables, "Model_humid").text = str(Model_humid)
      SubElement(variables, "Color").text = str(Color)
      SubElement(variables, "Fail_reason").text = str(Fail_reason)
      SubElement(variables, "QRCode").text = str(QRCode)
@@ -179,9 +173,8 @@ def Send_s6f11_Complete(SystemByteResult, Product_number, Model_name, Model_temp
 # -----------------------------------------------------------------
 
 # PI -> Server  Lot 작업 시작 전송(CEID = 2)
-def Send_s6f11_Lot_Start(SystemByteResult):
-     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
-     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+def Send_s6f11_Lot_Start(ServerIP, Port, SystemByteResult):
+     clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -206,9 +199,8 @@ def Send_s6f11_Lot_Start(SystemByteResult):
 
 
 # PI -> Server  Lot 명령에 대한 모든 제품을 생산 완료함(CEID = 3)
-def Send_s6f11_Lot_Complete(SystemByteResult):
-     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
-     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+def Send_s6f11_Lot_Complete(ServerIP, Port, SystemByteResult):
+     clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD
@@ -257,9 +249,8 @@ def Send_s6f11_Lot_Complete(SystemByteResult):
 # -----------------------------------------------------------------
 
 ## PI -> Server  라인 환경 정보 업데이트(온습도, CEID = 4)
-def Send_s6f11_TempHumid(SystemByteResult, Temp, Humid):
-     clientSock = connToServer("220.69.249.231", 4000) # 서버에 접속
-     # clientSock = connToServer("220.69.249.226", 4000) # 서버에 접속
+def Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, Temp, Humid):
+     clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
      ## HEAD

@@ -4,6 +4,12 @@ from multiprocessing import Queue, Process
 from pyzbar import pyzbar   # 바코드, QR코드 읽는 라이브러리
 from AriaMethod import *    # AriaMethod.py 파일 불러옴
 
+## 서버IP, Port 정의
+ServerIP = "220.69.249.231"
+#ServerIP = "220.69.249.226"
+Port = 4000
+
+
 CAM_ID = 0
 CAM_WIDTH = 352  #480
 CAM_HEIGHT = 288 #320
@@ -126,7 +132,7 @@ def read_barcode(frame):
 
     # 전역변수 설정
     global flag
-    
+
     # 이미지에서 바코드를 찾고 각 바코드를 디코드한다.
     decoded = pyzbar.decode(gray)   
     barcode_data = ""
@@ -149,9 +155,10 @@ def read_barcode(frame):
             cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
 
+            ## QR코드의 데이터를 한번만 전송하기 위한 조건문
             if(flag == 1):
                 # Server에 접속
-                clientSock = connToServer("220.69.249.231", 4000)
+                clientSock = connToServer(ServerIP, Port)
                 print("---------- barcode_data ----------")
                 print(barcode_data)
 

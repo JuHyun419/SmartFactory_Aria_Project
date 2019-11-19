@@ -4,9 +4,16 @@ from multiprocessing import Queue, Process
 from import_detect import * # import_detect.py 파일 불러옴
 import Adafruit_DHT         # 온습도 관련 라이브러리
 from AriaMethod import *    # AriaMethod.py 파일 불러옴
+import threading            # 쓰레드 관련 라이브러리
+import time as time1        # 타임 관련 라이브러리
 
-import threading
-import time as time1
+
+## 서버IP, Port 정의
+ServerIP = "220.69.249.231"
+#ServerIP = "220.69.249.226"
+Port = 4000
+
+BlueProduct = 0 # 정상품 카운트 할 변수
 
 BAUDRATE = 9600
 time_flag = 0
@@ -97,8 +104,9 @@ def get_H_T():
         SystemByteResult = SystemBytePlus()
 
         # Server로 온,습도 값 전송
-        Send_s6f11_TempHumid(SystemByteResult, temp, hum)
+        Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
     
+
 def image_process(cap, ser, q, state_flag, state_list):
     goods_x, signal, barcode = cam(cap)
 
@@ -177,7 +185,7 @@ try:
         
         # ----------------------------------------------------------
         # while True:
-        #     clientSock = connToServer("220.69.249.226", 4000)   # Server에 접속
+        #     clientSock = connToServer(ServerIP, Port)   # Server에 접속
         #     clientSock.send("value = ?".encode('utf-8'))    # encode() - 문자열을 byte로 변환
         #     data = clientSock.recv(1024)    # 서버로부터 데이터 받음
         #     print('받은 데이터 : ', data.decode('utf-8'))   # decode() - byte를 문자열로 변환
@@ -192,13 +200,13 @@ try:
         #         # Model_temp  : 상품 적정 온도
         #         # Model_humid : 상품 적정 습도
         #         # Color       : 상품 색상
-        #         Model_name, Prod_count, Model_temp, Model_humid, Color = Receive_s2f41(recvData)
+        #         Model_name, Prod_count, Color = Receive_s2f41(recvData)
         #         print("------------------------------")
         #         now = time1.localtime()
         #         print ("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
-        #         print("MES Server로 부터 명령을 받았습니다.")
+        #         print("MES Server로 부터 Start 명령을 받았습니다.")
         #         print("------------------------------")
-                  
+  
         #         # 명령 보낼때마다 1씩 증가
         #         SystemByteResult = SystemBytePlus()
 
@@ -208,7 +216,7 @@ try:
         #         break
         #     time1.sleep(2)  # 2초 딜레이
         # ----------------------------------------------------------
-        
+
         q = Queue()
         ser = serial_open()
         p1 = Process(target = main_process, args = (ser,q))
