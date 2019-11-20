@@ -41,8 +41,6 @@ _recvData = '''
 ## 문자열 -> Xml 객체로 파싱하는 함수
 # Model_name  : 아리아크림빵,
 # Prod_count  : 상품 개수
-# Model_temp  : 상품 적정 온도
-# Model_humid : 상품 적정 습도
 # Color       : 상품 색상
 def Receive_s2f41(recvData):
     tree = ET.fromstring(recvData)   # 문자열 -> Xml 객체
@@ -102,9 +100,9 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 #           <VARIABLES>
 #            <Product_number> 01, 02, 10, 20, ... </Product_number>
 #            <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
-#	         <Color> "Blue" or "Red" <Color>
+#            <Prod_Percent> 1/10 </Prod_Percent>
+#	         <Result> "Pass" or "Fail" </Result>
 #        	 <Fail_reason> reason </Fail_reason>
-#	         <QRCode> {{product_number,model_name,model_temp,model_humid}} </QRCode>
 #	         <C/V move state> 임의값 </C/V move state>
 #	         <Robot gripper state> 임의값 </Robot gripper state>
 #           </VARIABLES>
@@ -114,8 +112,8 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 #   </SECS2_XML_MESSAGE>
 # -----------------------------------------------------------------
 
-# PI -> Server  1개의 제품 생산 완료 전송(CEID = 1)
-def Send_s6f11_Complete(ServerIP, Port, SystemByteResult, Product_number, Model_name, Color, Fail_reason, QRCode):
+# PI -> Server  1개의 정상 제품 생산 완료 전송(CEID = 1)
+def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent):
      clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
@@ -137,9 +135,75 @@ def Send_s6f11_Complete(ServerIP, Port, SystemByteResult, Product_number, Model_
      variables = SubElement(report, "VARIABLES")
      SubElement(variables, "Product_number").text = str(Product_number)
      SubElement(variables, "Model_name").text = str(Model_name)
-     SubElement(variables, "Color").text = str(Color)
-     SubElement(variables, "Fail_reason").text = str(Fail_reason)
-     SubElement(variables, "QRCode").text = str(QRCode)
+     SubElement(variables, "Prod_Percent").text = str(Prod_Percent)
+     SubElement(variables, "Result").text = "Pass"
+     SubElement(variables, "Fail_reason").text = " "
+     SubElement(variables, "C/V move state").text = "Start"
+     SubElement(variables, "Robot gripper state").text = "Start"
+
+     # XML 형식을 bytes로 변환
+     data = ET.tostring(root, encoding='utf-8', method='xml')
+
+     #  str_data = str(data)   # 문자열로 변환
+     #  str_data2 = str_data.replace("b", "").replace("'", "") # 문자열 중 b' 제거
+
+     clientSock.send(data)    # Server로 데이터 전송
+
+
+# -----------------------------------------------------------------
+# XML 형식
+#   <SECS2_XML_MESSAGE>
+#     <HEAD>
+#       <SystemByte> 00001 </SystemByte>
+#       <CMD> 3 </CMD>
+#       <Stream> 6 </Stream>
+#       <Function> 11 </Function>
+#     </HEAD>
+#     <BODY>
+#       <CEID> 1 </CEID> // Line_Env_Update
+#       <REPORTS>
+#         <REPORT>
+#           <REPORTID> 100 </REPORTID>
+#           <VARIABLES>
+#            <Product_number> 01, 02, 10, 20, ... </Product_number>
+#            <Model_name> 아리아크림빵,아리아메론빵 </Model_name>
+#            <Prod_Percent> 1/10 </Prod_Percent>
+#	         <Result> "Pass" or "Fail" </Result>
+#        	 <Fail_reason> reason </Fail_reason>
+#	         <C/V move state> 임의값 </C/V move state>
+#	         <Robot gripper state> 임의값 </Robot gripper state>
+#           </VARIABLES>
+#         </REPORT>
+#       </REPORTS>
+#     </BODY>
+#   </SECS2_XML_MESSAGE>
+# -----------------------------------------------------------------
+# PI -> Server  1개의 불량 제품 생산 완료 전송(CEID = 1)
+def Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent):
+     clientSock = connToServer(ServerIP, Port) # 서버에 접속
+     root = Element("SECS2_XML_MESSAGE")
+
+     ## HEAD
+     head = SubElement(root, "HEAD")
+     SubElement(head, "SystemByte").text = SystemByteResult
+     SubElement(head, "CMD").text = "3"
+     SubElement(head, "Stream").text = "6"
+     SubElement(head,"Function").text = "11"
+
+     ## BODY
+     body = SubElement(root, "BODY")
+     SubElement(body, "CEID").text = "1"
+     reports = SubElement(body, "REPORTS")
+
+     ## REPORT
+     report = SubElement(reports, "REPORT")
+     SubElement(report, "REPORTID").text = "100"
+     variables = SubElement(report, "VARIABLES")
+     SubElement(variables, "Product_number").text = str(Product_number)
+     SubElement(variables, "Model_name").text = str(Model_name)
+     SubElement(variables, "Prod_Percent").text = str(Prod_Percent)
+     SubElement(variables, "Result").text = "Fail"
+     SubElement(variables, "Fail_reason").text = "Red"
      SubElement(variables, "C/V move state").text = "Start"
      SubElement(variables, "Robot gripper state").text = "Start"
 

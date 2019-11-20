@@ -8,12 +8,14 @@ import threading            # 쓰레드 관련 라이브러리
 import time as time1        # 타임 관련 라이브러리
 
 
+print("여긴 어디 ???")
 ## 서버IP, Port 정의
-ServerIP = "220.69.249.231"
-#ServerIP = "220.69.249.226"
+#ServerIP = "220.69.249.231"
+ServerIP = "220.69.249.226"
 Port = 4000
 
 BlueProduct = 0 # 정상품 카운트 할 변수
+RedProduct = 0  # 비정상품 카운트 할 변수
 
 BAUDRATE = 9600
 time_flag = 0
@@ -89,32 +91,63 @@ def receive_arduino(ser, q):
 def get_H_T():
     global time_flag
     global last_time
+
+    # temp = 온도, hum = 습도
+    temp, hum = humanity_temp()
+
+    # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...)
+    SystemByteResult = SystemBytePlus()
+
+    # Server로 temp, hum 전송
+    Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
+
+    # 10초
+    time1.sleep(10)
+
+    
     if time_flag == 0:
         last_time = time()
         time_flag = 1
-    
+
     # 10초 간격 온습도 출력
-    if time() - last_time >= 7:
+    if time() - last_time >= 10:
         temp, hum = humanity_temp()
         time_flag = 0
+        now = time1.localtime()
+        print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
         print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
 
-        # Server로 넘기는 XML 데이터중 SystemByte 값
-        #  - 한번 보낼때마다 1씩 증가해야함
-        SystemByteResult = SystemBytePlus()
+    #     # Server로 넘기는 XML 데이터중 SystemByte 값
+    #     #  - 한번 보낼때마다 1씩 증가해야함
+    #     SystemByteResult = SystemBytePlus()
 
-        # Server로 온,습도 값 전송
-        Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
-    
+    #     # Server로 온,습도 값 전송
+    #     Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
+
 
 def image_process(cap, ser, q, state_flag, state_list):
     goods_x, signal, barcode = cam(cap)
 
+    global BlueProduct
+    global RedProduct
+
     # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
     if signal == 'P' and (goods_x >= 5 and goods_x <= 260):
-        print("블루에용~~~")    
+        print("블루에용~~~")   
+
         if state_flag == "SEND_STOP":   # 상태가 STOP 일때
             print("블루 - SEND_STOP 이에용 ~~~")
+            BlueProduct += 1    # 파랑색 제품 1개 추가
+
+            # 생산개수 / 총개수
+            Prod_Percent_Blue = str(BlueProduct) + "/" + str(Prod_count)
+
+            # 명령 보낼때마다 1씩 증가
+            SystemByteResult = SystemBytePlus()
+
+            # Blue(정상) 제품 생산 완료시 서버에게 전송하는 데이터
+            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "01", Model_name, Prod_Percent_Blue)
+
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"    # 상태 GRAB
 
@@ -126,8 +159,17 @@ def image_process(cap, ser, q, state_flag, state_list):
     # 받은 신호가 F(레드) 일때, 카메라가 레드 제품을 확인하고 컨베이어 벨트를 멈추는 범위
     elif signal == 'F' and (goods_x >= 5 and goods_x <= 260):
         print("레드에용~~~")
+        
         if state_flag == "SEND_STOP":
             print("레드 - SEND_STOP 이에용 ~~~")
+
+            # 불량개수
+            RedProduct += 1
+            
+            # 명령 보낼때마다 1씩 증가
+            SystemByteResult = SystemBytePlus()
+            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, 10, Model_name, RedProduct)
+
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"
 
@@ -184,37 +226,35 @@ try:
         print("start \n")
         
         # ----------------------------------------------------------
-        # while True:
-        #     clientSock = connToServer(ServerIP, Port)   # Server에 접속
-        #     clientSock.send("value = ?".encode('utf-8'))    # encode() - 문자열을 byte로 변환
-        #     data = clientSock.recv(1024)    # 서버로부터 데이터 받음
-        #     print('받은 데이터 : ', data.decode('utf-8'))   # decode() - byte를 문자열로 변환
-        #     recvData = data.decode('utf-8') # Server로 부터 받은 byte를 문자열로 변환
+        while True:
+            clientSock = connToServer(ServerIP, Port)   # Server에 접속
+            clientSock.send("value = ?".encode('utf-8'))    # encode() - 문자열을 byte로 변환
+            data = clientSock.recv(1024)    # 서버로부터 데이터 받음
+            print('받은 데이터 : ', data.decode('utf-8'))   # decode() - byte를 문자열로 변환
+            recvData = data.decode('utf-8') # Server로 부터 받은 byte를 문자열로 변환
 
-        #     # Server로 부터 받은 데이터가 false가 아닐때,
-        #     # 실직적으로 공장 시작되는 시점
-        #     if recvData != 'false':
-        #         # Server로 부터 받은 데이터중 필요한 데이터를 뽑아냄
-        #         # Model_name  : 아리아크림빵,
-        #         # Prod_count  : 상품 개수
-        #         # Model_temp  : 상품 적정 온도
-        #         # Model_humid : 상품 적정 습도
-        #         # Color       : 상품 색상
-        #         Model_name, Prod_count, Color = Receive_s2f41(recvData)
-        #         print("------------------------------")
-        #         now = time1.localtime()
-        #         print ("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
-        #         print("MES Server로 부터 Start 명령을 받았습니다.")
-        #         print("------------------------------")
+            # Server로 부터 받은 데이터가 false가 아닐때,
+            # 실직적으로 공장 시작되는 시점
+            if recvData != 'false':
+                # Server로 부터 받은 데이터중 필요한 데이터를 뽑아냄
+                # Model_name  : 아리아크림빵,
+                # Prod_count  : 상품 개수
+                # Color       : 상품 색상
+                Model_name, Prod_count, Color = Receive_s2f41(recvData)
+                print("------------------------------")
+                now = time1.localtime()
+                print ("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                print("MES Server로 부터 Start 명령을 받았습니다.")
+                print("------------------------------")
   
-        #         # 명령 보낼때마다 1씩 증가
-        #         SystemByteResult = SystemBytePlus()
+                # 명령 보낼때마다 1씩 증가
+                SystemByteResult = SystemBytePlus()
 
-        #         # Server에게 작업 지시에 대한 응답 전송
-        #         Send_s2f42(SystemByteResult)
-        #         print(Model_name, Prod_count, Model_temp, Model_humid, Color)
-        #         break
-        #     time1.sleep(2)  # 2초 딜레이
+                # Server에게 작업 지시에 대한 응답 전송
+                Send_s2f42(ServerIP, Port, SystemByteResult)
+                print(Model_name, Prod_count, Color)
+                break
+            time1.sleep(2)  # 2초 딜레이
         # ----------------------------------------------------------
 
         q = Queue()

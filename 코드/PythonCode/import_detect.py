@@ -5,10 +5,9 @@ from pyzbar import pyzbar   # 바코드, QR코드 읽는 라이브러리
 from AriaMethod import *    # AriaMethod.py 파일 불러옴
 
 ## 서버IP, Port 정의
-ServerIP = "220.69.249.231"
-#ServerIP = "220.69.249.226"
+#ServerIP = "220.69.249.231"
+ServerIP = "220.69.249.226"
 Port = 4000
-
 
 CAM_ID = 0
 CAM_WIDTH = 352  #480
