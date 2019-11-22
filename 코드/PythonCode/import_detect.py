@@ -92,7 +92,7 @@ def detect_goods(filter_blue_image, filter_red_image, frame):
     if len(contours_blue) > 0:
         c = max(contours_blue, key=cv.contourArea)
         signal = 'P'    
-        
+    
     # 빨간색 제품
     elif len(contours_red) > 0:
         c = max(contours_red, key=cv.contourArea)
@@ -112,6 +112,7 @@ def detect_goods(filter_blue_image, filter_red_image, frame):
     y = int(y)
       
     if int(radius) > 15:
+        print("detect_goods@@@@@")
         (data, frame) = read_barcode(frame)
         #print("QRCODE: " + data + " signal: " + signal + "\n\n")
         cv.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
@@ -137,6 +138,7 @@ def read_barcode(frame):
     barcode_data = ""
     
     if len(decoded) > 0:
+        print("len(decoded) >0 부분!!!")
 
         # 검출한 바코드를 위한 루프
         for d in decoded: 
@@ -154,23 +156,22 @@ def read_barcode(frame):
             cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             cv.putText(frame, text, (x, y), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2, cv.LINE_AA)
 
-            ## QR코드의 데이터를 한번만 전송하기 위한 조건문
-            if(flag == 1):
-                # Server에 접속
-                clientSock = connToServer(ServerIP, Port)
-                print("---------- barcode_data ----------")
-                print(barcode_data)
+            # ## QR코드의 데이터를 한번만 전송하기 위한 조건문
+            # if(flag == 1):
+            #     # Server에 접속
+            #     clientSock = connToServer(ServerIP, Port)
+            #     print("---------- barcode_data ----------")
+            #     print(barcode_data)
 
-                # Aria 프로토콜 정의
-                # {{product_number, model_name, Line}}
-                aria_barcode_data = "{{" + barcode_data + "}}"
+            #     # Aria 프로토콜 정의
+            #     # {{product_number, model_name, Line}}
+            #     aria_barcode_data = "{{" + barcode_data + "}}"
 
-                # Server에 QR코드 전송
-                # encode() : 문자열 -> Byte 변환2
-                clientSock.send(aria_barcode_data.encode('utf-8'))
-                print("----------------------------------")
-                flag -= 1   # 전역변수 flag값을 감소시켜 다음에 함수가 실행되도 if문 실행 X
-            
+            #     # Server에 QR코드 전송
+            #     # encode() : 문자열 -> Byte 변환2
+            #     clientSock.send(aria_barcode_data.encode('utf-8'))
+            #     print("----------------------------------")
+            #     flag -= 1   # 전역변수 flag값을 감소시켜 다음에 함수가 실행되도 if문 실행 X
             return barcode_data, frame
     else:
         return barcode_data, frame    

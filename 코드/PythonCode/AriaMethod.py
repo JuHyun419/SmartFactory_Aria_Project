@@ -138,8 +138,8 @@ def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, M
      SubElement(variables, "Prod_Percent").text = str(Prod_Percent)
      SubElement(variables, "Result").text = "Pass"
      SubElement(variables, "Fail_reason").text = " "
-     SubElement(variables, "C/V move state").text = "Start"
-     SubElement(variables, "Robot gripper state").text = "Start"
+     SubElement(variables, "CV_move_state").text = "Start"
+     SubElement(variables, "Robot_gripper_state").text = "Start"
 
      # XML 형식을 bytes로 변환
      data = ET.tostring(root, encoding='utf-8', method='xml')
@@ -204,8 +204,8 @@ def Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, Product_number, Mo
      SubElement(variables, "Prod_Percent").text = str(Prod_Percent)
      SubElement(variables, "Result").text = "Fail"
      SubElement(variables, "Fail_reason").text = "Red"
-     SubElement(variables, "C/V move state").text = "Start"
-     SubElement(variables, "Robot gripper state").text = "Start"
+     SubElement(variables, "CV_move_state").text = "Start"
+     SubElement(variables, "Robot_gripper_state").text = "Start"
 
      # XML 형식을 bytes로 변환
      data = ET.tostring(root, encoding='utf-8', method='xml')
