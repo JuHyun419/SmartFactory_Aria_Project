@@ -1,3 +1,1 @@
-barcode = "04/아리아크림빵/L#3"
-barcode_str = barcode.split("/")
-print(barcode_str[0])
+print("온도 : %d 습도 : %d 값이 MES Server로 전송되었습니다." % (15, 20))

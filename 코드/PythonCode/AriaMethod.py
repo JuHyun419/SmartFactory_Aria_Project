@@ -137,7 +137,7 @@ def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, M
      SubElement(variables, "Model_name").text = str(Model_name)
      SubElement(variables, "Prod_Percent").text = str(Prod_Percent)
      SubElement(variables, "Result").text = "Pass"
-     SubElement(variables, "Fail_reason").text = " "
+     SubElement(variables, "Fail_reason").text = "Pass"
      SubElement(variables, "CV_move_state").text = "Start"
      SubElement(variables, "Robot_gripper_state").text = "Start"
 

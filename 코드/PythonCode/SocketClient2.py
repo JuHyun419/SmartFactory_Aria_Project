@@ -3,7 +3,7 @@ from socket import *
 clientSock = socket(AF_INET, SOCK_STREAM)
 
 # 클라이언트에서 서버에 접속
-clientSock.connect(('127.0.0.1', 8099))
+clientSock.connect(('220.69.249.226', 4000))
 
 print('연결 확인 됐습니다.')
 data = "I am a Client"

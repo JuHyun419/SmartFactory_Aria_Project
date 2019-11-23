@@ -112,7 +112,7 @@ def detect_goods(filter_blue_image, filter_red_image, frame):
     y = int(y)
       
     if int(radius) > 15:
-        print("detect_goods@@@@@")
+        # print("detect_goods@@@@@")
         (data, frame) = read_barcode(frame)
         #print("QRCODE: " + data + " signal: " + signal + "\n\n")
         cv.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
@@ -138,7 +138,6 @@ def read_barcode(frame):
     barcode_data = ""
     
     if len(decoded) > 0:
-        print("len(decoded) >0 부분!!!")
 
         # 검출한 바코드를 위한 루프
         for d in decoded: 
@@ -184,7 +183,7 @@ def cam(cap):
 
     # rectangle() : 사각형 그려주는 함수
     cv.rectangle(frame, (50, 0), (302, 288), (0, 0, 255), 2)
-    
+
     # imshow() : 이미지를 사이즈에 맞게 보여줌
     cv.imshow('frame', frame)
     cv.imshow('filter_blue_mask', filter_blue_image)

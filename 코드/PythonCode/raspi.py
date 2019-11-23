@@ -13,8 +13,8 @@ import time as time1        # 타임 관련 라이브러리
 ServerIP = "220.69.249.226"
 Port = 4000
 
-BlueProduct = 0 # 정상품 카운트 할 변수
-RedProduct = 0  # 비정상품 카운트 할 변수
+CompleteProduct = 0 # 정상품 카운트 할 변수
+#RedProduct = 0  # 비정상품 카운트 할 변수
 
 BAUDRATE = 9600
 time_flag = 0
@@ -99,44 +99,57 @@ def get_H_T():
         time_flag = 1
 
     # 10초 간격 온습도 출력
-    if time() - last_time >= 10:
+    if time() - last_time >= 5:
         temp, hum = humanity_temp()
         time_flag = 0
         now = time1.localtime()
         print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
         print('Temp={0}*C  Humidity={1}%'.format(temp, hum))
 
+        # # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...)
+        # SystemByteResult = SystemBytePlus()
+
+        # # Server로 temp, hum 전송
+        # Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
+
+
 def image_process(cap, ser, q, state_flag, state_list):
 
     goods_x, signal, barcode = cam(cap)
-    global BlueProduct
-    global RedProduct
+    global CompleteProduct
 
-    
     # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
     if signal == 'P' and (goods_x >= 5 and goods_x <= 260):
-        print("블루에용~~~")   
-        print(barcode)
-        # 01/아리아크림빵/L#3 문자열을 "/"을 기준으로 자르기
-        barcode_str = str(barcode).split("/")
+        #print("블루에용~~~")   
 
         if state_flag == "SEND_STOP":   # 상태가 STOP 일때
+            temp, hum = humanity_temp()
+            if(temp != 0 and hum != 0):
+                # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
+                SystemByteResult = SystemBytePlus()
+
+                # Server로 temp, hum 전송
+                Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
+
+                # 현재 시간, 온습도 출력 로그
+                now = time1.localtime()
+                print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                #print("온도 : %d *C 습도 : %d 값이 MES Server로 전송되었습니다." % (temp, hum))
+            else:
+                print("온도, 습도값이 비정상적입니다.")
+
             print("블루 - SEND_STOP 이에용 ~~~")
-            BlueProduct += 1    # 파랑색 제품 1개 추가
+            CompleteProduct += 1    # 파랑색 제품 1개 추가
 
             # 생산개수 / 총개수
-            Prod_Percent_Blue = str(BlueProduct) + "/" + str(Prod_count)
+            Prod_Percent_Blue = str(CompleteProduct) + "/" + str(Prod_count)
 
             # 명령 보낼때마다 1씩 증가
             SystemByteResult = SystemBytePlus()
 
             # Blue(정상) 제품 생산 완료시 서버에게 전송하는 데이터
-            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, barcode_str[0], Model_name, Prod_Percent_Blue)
+            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "10", Model_name, Prod_Percent_Blue)
 
-            print("===================-----=================")
-            print(type(barcode_str[0]))
-            print(barcode_str)
-            print("===================-----=================")
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"    # 상태 GRAB
 
@@ -151,12 +164,32 @@ def image_process(cap, ser, q, state_flag, state_list):
         print(barcode)
         
         if state_flag == "SEND_STOP":
+
+            temp, hum = humanity_temp()
+            if(temp != 0 and hum != 0):
+                # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
+                SystemByteResult = SystemBytePlus()
+
+                # Server로 temp, hum 전송
+                Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
+
+                # 현재 시간, 온습도 출력 로그
+                now = time1.localtime()
+                print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                #print("온도 : %d*C 습도 : %d% 값이 MES Server로 전송되었습니다." % (temp, hum))
+
+            else:
+                print("온도, 습도값이 비정상적입니다.")
+
             print("레드 - SEND_STOP 이에용 ~~~")
-            RedProduct += 1     # 불량개수
+            CompleteProduct += 1     # 완성개수
+
+            # 생산개수 / 총개수
+            Prod_Percent_Blue = str(CompleteProduct) + "/" + str(Prod_count)
             
             # 명령 보낼때마다 1씩 증가
             SystemByteResult = SystemBytePlus()
-            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, barcode_str[0], Model_name, RedProduct)
+            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, "10", Model_name, Prod_Percent_Blue)
 
             command_arduino(ser, 1)
             state_flag = "SEND_GRAB"
@@ -171,20 +204,6 @@ def image_process(cap, ser, q, state_flag, state_list):
             rx_data = q.get()
             print(rx_data)
             if rx_data == "complete":
-                 # Server에 접속
-                clientSock = connToServer(ServerIP, Port)
-                print("---------- barcode_data ----------")
-                print(barcode)
-
-                # Aria 프로토콜 정의
-                # {{product_number, model_name, Line}}
-                aria_barcode_data = "{{" + barcode + "}}"
-
-                # Server에 QR코드 전송
-                # encode() : 문자열 -> Byte 변환2
-                clientSock.send(aria_barcode_data.encode('utf-8'))
-                print("----------------------------------")
-
                 command_arduino(ser, 0)
                 state_flag = "SEND_STOP"
     return state_flag
@@ -209,26 +228,13 @@ def main_process(ser, q):
 def serve_process(ser, q):
     while True:
         receive_arduino(ser, q)
-    
+
 # 온습도 받는 process
 def temp_huminity_process(q):
     
     print("=====================")
     print("temp_huminity_process")
     print("=====================")
-
-
-    # # temp = 온도, hum = 습도
-    # temp, hum = humanity_temp()
-
-    # # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...)
-    # SystemByteResult = SystemBytePlus()
-
-    # # Server로 temp, hum 전송
-    # Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, temp, hum)
-
-    # # 10초
-    # time1.sleep(9)
 
     factory_state = ""
     temp_state = 1
@@ -240,7 +246,6 @@ def temp_huminity_process(q):
         
         if factory_state == "start" and temp_state == 2:
             get_H_T()
-
 
 try:
     if __name__ == "__main__":
@@ -264,7 +269,7 @@ try:
                 Model_name, Prod_count, Color = Receive_s2f41(recvData)
                 print("------------------------------")
                 now = time1.localtime()
-                print ("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
                 print("MES Server로 부터 Start 명령을 받았습니다.")
                 print("------------------------------")
   
