@@ -1,1 +1,10 @@
-print("온도 : %d 습도 : %d 값이 MES Server로 전송되었습니다." % (15, 20))
+ServerIP = "220.69.240.200"
+Port = "4000"
+
+def abc(ServerIP, Port):
+    print(ServerIP, Port)
+
+def abcABC(ServerIP, Port):
+    abc(ServerIP, Port)
+
+abcABC(ServerIP, Port)

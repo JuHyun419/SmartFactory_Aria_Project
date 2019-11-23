@@ -50,7 +50,7 @@ def cam_streaming(cap):
     
     else:
         print("camera read error \n")
-        
+
 # 이미지 필터링
 # HSV - 이미지 처리에서 가장 많이 사용되는 형태의 Color 모델
 #       하나의 모델에서 색, 채도, 명도를 모두 알 수 있음 
