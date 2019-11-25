@@ -149,7 +149,7 @@ def image_process(cap, ser, q, state_flag, state_list):
             SystemByteResult = SystemBytePlus()
 
             # Blue(정상) 제품 생산 완료시 서버에게 전송하는 데이터
-            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "10", Model_name, Prod_Percent_Blue)
+            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct)
 
 
         if state_flag == "SEND_GRAB"  and len(barcode) > 5:
@@ -192,7 +192,7 @@ def image_process(cap, ser, q, state_flag, state_list):
             
             # 명령 보낼때마다 1씩 증가
             SystemByteResult = SystemBytePlus()
-            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, "10", Model_name, Prod_Percent_Blue)
+            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct)
 
 
         if state_flag == "SEND_GRAB"  and len(barcode) > 5:
