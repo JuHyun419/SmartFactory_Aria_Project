@@ -248,6 +248,9 @@ void rack_forward()
 // 피니언 움직이는 함수(컨베이어 벨트쪽으로)
 void rack_backward()
 {
+void conveyer_dc_op()
+{
+  digitalWrite(IN1, 0); // 12번
   digitalWrite(IN3, 0); // 2번
   digitalWrite(IN4, 1); // 4번
   analogWrite(EN2, 35); // 11번
@@ -263,9 +266,6 @@ void rack_stop()
 }
 
 // 컨베이어벨트 동작 함수(0, 1 = 정방향, 53 = 속도)
-void conveyer_dc_op()
-{
-  digitalWrite(IN1, 0); // 12번
   digitalWrite(IN2, 1); // 13번
   analogWrite(EN1, 51); // 3번
 }

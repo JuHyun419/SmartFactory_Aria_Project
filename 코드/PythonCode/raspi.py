@@ -52,20 +52,20 @@ def SystemBytePlus():
     SystemByteResult = str(SystemByte[0]) + str(SystemByte[1]) + str(SystemByte[2]) + str(SystemByte[3]) + str(SystemByte[4])
     return SystemByteResult
 
-## 온, 습도 리턴 함수
-def humanity_temp():
-    humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
+# ## 온, 습도 리턴 함수
+# def humanity_temp():
+#     humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
     
-    # 온, 습도 값이 존재할때
-    if humidity is not None and temperature is not None:
-        return int(temperature), int(humidity)  # 온습도 값 리턴
+#     # 온, 습도 값이 존재할때
+#     if humidity is not None and temperature is not None:
+#         return int(temperature), int(humidity)  # 온습도 값 리턴
 
-    # 온, 습도 값이 존재하지 않을때
-    else:
-        #print('Failed to get reading. Try again!')
-        temperature = 0 
-        humidity = 0 
-        return temperature, humidity   # 온습도 0으로 초기화 후 리턴
+#     # 온, 습도 값이 존재하지 않을때
+#     else:
+#         #print('Failed to get reading. Try again!')
+#         temperature = 0 
+#         humidity = 0 
+#         return temperature, humidity   # 온습도 0으로 초기화 후 리턴
 
 ## 시리얼 객체 생성(open) - 아두이노 통신
 def serial_open():
@@ -88,17 +88,7 @@ def receive_arduino(ser, q):
         data = str(data[:-1].decode())  
         q.put(data)
 
-## 온습도를 받아서 Server로 전송하는 함수(Test 해보기)
-def sendTempHumid():
-    time1.sleep(3)
-    SystemByteResult = SystemBytePlus()
-    Humid2, Temp2 = Adafruit_DHT.read_retry(sensor, pin)
-    Humid = int(Humid2)
-    Temp = int(Temp2)
-    Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, Temp, Humid)
-
-# -------------------------- 주석처리 4시 54분-----------------------
-# 온습도 출력
+## 온습도 출력
 # def get_H_T():
 #     global time_flag
 #     global last_time
@@ -121,8 +111,7 @@ def image_process(cap, ser, q, state_flag, state_list):
     global CompleteProduct
 
     # 받은 신호가 P(블루) 일때, 카메라가 블루 제품을 확인하고 컨베이어 벨트를 멈추는 범위
-    if signal == 'P' and (goods_x >= 5 and goods_x <= 260):
-        #print("블루에용~~~")   
+    if signal == 'P' and (goods_x >= 5 and goods_x <= 260): 
 
         if state_flag == "SEND_STOP":   # 상태가 STOP 일때
 
@@ -132,13 +121,10 @@ def image_process(cap, ser, q, state_flag, state_list):
 
             # 온습도 받아오는 함수
             hum, temp = Adafruit_DHT.read_retry(sensor, pin)
+
+            # 온습도값 int로 형변환
             temp = int(temp)
             hum = int(hum)
-
-            # ------------------------------------
-            print(type(hum))
-            print(type(temp))
-            # ------------------------------------
 
             if(temp != 0 and hum != 0):
                 # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
@@ -173,8 +159,6 @@ def image_process(cap, ser, q, state_flag, state_list):
             
     # 받은 신호가 F(레드) 일때, 카메라가 레드 제품을 확인하고 컨베이어 벨트를 멈추는 범위
     elif signal == 'F' and (goods_x >= 5 and goods_x <= 260):
-        print("레드에용~~~")
-        print(barcode)
         
         if state_flag == "SEND_STOP":
             command_arduino(ser, 1)
@@ -182,6 +166,10 @@ def image_process(cap, ser, q, state_flag, state_list):
 
             # 온습도 받아오는 함수
             hum, temp = Adafruit_DHT.read_retry(sensor, pin)
+
+            # 온습도값 int로 형변환
+            temp = int(temp)
+            hum = int(hum)
 
             if(temp != 0 and hum != 0):
                 # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
@@ -193,12 +181,10 @@ def image_process(cap, ser, q, state_flag, state_list):
                 # 현재 시간, 온습도 출력 로그
                 now = time1.localtime()
                 print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
-                #print("온도 : %d*C 습도 : %d% 값이 MES Server로 전송되었습니다." % (temp, hum))
-
+                print("온도 : %d, 습도 : %d 값이 MES Server로 전송되었습니다." % (temp, hum))
             else:
                 print("온도, 습도값이 비정상적입니다.")
 
-            print("레드 - SEND_STOP 이에용 ~~~")
             CompleteProduct += 1     # 완성개수
 
             # 생산개수 / 총개수
@@ -283,18 +269,26 @@ try:
                 # Prod_count  : 상품 개수
                 # Color       : 상품 색상
                 Model_name, Prod_count, Color = Receive_s2f41(recvData)
-                print("------------------------------")
+                print("------------------------------------------")
                 now = time1.localtime()
                 print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
-                print("MES Server로 부터 Start 명령을 받았습니다.")
-                print("------------------------------")
+                time1.sleep(1)
+                print("MES Server로 부터 작업지시 명령을 받았습니다.")
+                time1.sleep(1)
+                print("------------------------------------------")
 
                 # 명령 보낼때마다 1씩 증가
                 SystemByteResult = SystemBytePlus()
 
                 # Server에게 작업 지시에 대한 응답 전송
                 Send_s2f42(ServerIP, Port, SystemByteResult)
-                print(Model_name, Prod_count, Color)
+                print("제품이름 : " + Model_name)
+                print("제품수량 : " + Prod_count)
+                print("제품색상 : " + Color)
+                print()
+
+                print("3초뒤 Aria 공정이 작동됩니다.")
+                time1.sleep(3)
                 break
             time1.sleep(2)  # 2초 딜레이
         # ----------------------------------------------------------
@@ -303,16 +297,13 @@ try:
         ser = serial_open()
         p1 = Process(target = main_process, args = (ser,q))
         p2 = Process(target = serve_process, args = (ser,q))
-        # -------------------------- 주석처리 4시 54분-----------------------
         #p3 = Process(target = temp_huminity_process, args = (q, ))
 
-        p4 = Process(target = sendTempHumid, args = (ser, ))
         p1.start()
         p2.start()
         #p3.start()
-        p4.start()
 except KeyboardInterrupt:
     print("exit() \n")
     p1.join()
     p2.join()
-    p3.join()
+    #p3.join()
