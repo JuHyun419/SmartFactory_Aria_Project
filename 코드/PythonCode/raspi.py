@@ -258,8 +258,10 @@ try:
             clientSock = connToServer(ServerIP, Port)   # Server에 접속
             clientSock.send("value = ?".encode('utf-8'))    # encode() - 문자열을 byte로 변환
             data = clientSock.recv(1024)    # 서버로부터 데이터 받음
-            print('받은 데이터 : ', data.decode('utf-8'))   # decode() - byte를 문자열로 변환
+            print("MES Server로부터 수신 데이터 대기중...")   # decode() - byte를 문자열로 변환
             recvData = data.decode('utf-8') # Server로 부터 받은 byte를 문자열로 변환
+            ser = serial_open()
+            command_arduino(ser, 1)
 
             # Server로 부터 받은 데이터가 false가 아닐때,
             # 실직적으로 공장 시작되는 시점
@@ -289,6 +291,7 @@ try:
 
                 print("3초뒤 Aria 공정이 작동됩니다.")
                 time1.sleep(3)
+                command_arduino(ser, 0)
                 break
             time1.sleep(2)  # 2초 딜레이
         # ----------------------------------------------------------
