@@ -80,7 +80,6 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
     # indent(root)    # indent() : XML 형식으로 보기 좋게 만들어주는 함수
     # dump(root)      # dump 함수는 인자로 넘어온 tag 이하를 print 해줌
     clientSock.send(data)    # Server로 데이터 전송(bytes)
-    print(root.text)
 
 
 # -----------------------------------------------------------------
@@ -113,7 +112,7 @@ def Send_s2f42(ServerIP, Port, SystemByteResult):
 # -----------------------------------------------------------------
 
 # PI -> Server  1개의 정상 제품 생산 완료 전송(CEID = 1)
-def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent):
+def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent, temp, humid):
      clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
@@ -140,6 +139,8 @@ def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, M
      SubElement(variables, "Fail_reason").text = "Pass"
      SubElement(variables, "CV_move_state").text = "Start"
      SubElement(variables, "Robot_gripper_state").text = "Start"
+     SubElement(variables, "temp").text = str(temp)
+     SubElement(variables, "humid").text = str(humid)
 
      # XML 형식을 bytes로 변환
      data = ET.tostring(root, encoding='utf-8', method='xml')
@@ -179,7 +180,7 @@ def Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, Product_number, M
 #   </SECS2_XML_MESSAGE>
 # -----------------------------------------------------------------
 # PI -> Server  1개의 불량 제품 생산 완료 전송(CEID = 1)
-def Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent):
+def Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, Product_number, Model_name, Prod_Percent, temp, humid):
      clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")
 
@@ -206,6 +207,8 @@ def Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, Product_number, Mo
      SubElement(variables, "Fail_reason").text = "Red"
      SubElement(variables, "CV_move_state").text = "Start"
      SubElement(variables, "Robot_gripper_state").text = "Start"
+     SubElement(variables, "temp").text = str(temp)
+     SubElement(variables, "humid").text = str(humid)
 
      # XML 형식을 bytes로 변환
      data = ET.tostring(root, encoding='utf-8', method='xml')
@@ -312,7 +315,7 @@ def Send_s6f11_Lot_Complete(ServerIP, Port, SystemByteResult):
 #   </SECS2_XML_MESSAGE>
 # -----------------------------------------------------------------
 
-## PI -> Server  라인 환경 정보 업데이트(온습도, CEID = 4)
+## PI -> Server  라인 환경 정보 업데이트(온습도, CEID = 1)
 def Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult, Temp, Humid):
      clientSock = connToServer(ServerIP, Port) # 서버에 접속
      root = Element("SECS2_XML_MESSAGE")

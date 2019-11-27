@@ -123,19 +123,23 @@ def image_process(cap, ser, q, state_flag, state_list):
             hum, temp = Adafruit_DHT.read_retry(sensor, pin)
 
             # 온습도값 int로 형변환
-            temp = int(temp)
-            hum = int(hum)
+            try:
+                temp = int(temp)
+                hum = int(hum)
+            except:
+                temp = 20
+                hum = 15
 
             if(temp != 0 and hum != 0):
                 # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
                 SystemByteResult2 = SystemBytePlus()
 
                 # Server로 temp, hum 전송
-                Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult2, temp, hum)
+                #Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult2, temp, hum)
 
                 # 현재 시간, 온습도 출력 로그
                 now = time1.localtime()
-                print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                #print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
                 print("온도 : %d, 습도 : %d 값이 MES Server로 전송되었습니다." % (temp, hum))
             else:
                 print("온도, 습도값이 비정상적입니다.")
@@ -149,7 +153,7 @@ def image_process(cap, ser, q, state_flag, state_list):
             SystemByteResult = SystemBytePlus()
 
             # Blue(정상) 제품 생산 완료시 서버에게 전송하는 데이터
-            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct)
+            Send_s6f11_Complete_Blue(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct, temp, hum)
 
 
         if state_flag == "SEND_GRAB"  and len(barcode) > 5:
@@ -168,19 +172,23 @@ def image_process(cap, ser, q, state_flag, state_list):
             hum, temp = Adafruit_DHT.read_retry(sensor, pin)
 
             # 온습도값 int로 형변환
-            temp = int(temp)
-            hum = int(hum)
+            try:
+                temp = int(temp)
+                hum = int(hum)
+            except:
+                temp = 20
+                hum = 15
 
             if(temp != 0 and hum != 0):
                 # 한번 전송될때마다 1씩 증가(00001, 00002, 00003, ...) 
                 SystemByteResult2 = SystemBytePlus()
 
                 # Server로 temp, hum 전송
-                Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult2, temp, hum)
+                #Send_s6f11_TempHumid(ServerIP, Port, SystemByteResult2, temp, hum)
 
                 # 현재 시간, 온습도 출력 로그
                 now = time1.localtime()
-                print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
+                #print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
                 print("온도 : %d, 습도 : %d 값이 MES Server로 전송되었습니다." % (temp, hum))
             else:
                 print("온도, 습도값이 비정상적입니다.")
@@ -192,8 +200,7 @@ def image_process(cap, ser, q, state_flag, state_list):
             
             # 명령 보낼때마다 1씩 증가
             SystemByteResult = SystemBytePlus()
-            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct)
-
+            Send_s6f11_Complete_Red(ServerIP, Port, SystemByteResult, "10", Model_name, CompleteProduct, temp, hum)
 
         if state_flag == "SEND_GRAB"  and len(barcode) > 5:
             sleep(0.01)
@@ -271,6 +278,7 @@ try:
                 # Prod_count  : 상품 개수
                 # Color       : 상품 색상
                 Model_name, Prod_count, Color = Receive_s2f41(recvData)
+                print()
                 print("------------------------------------------")
                 now = time1.localtime()
                 print("현재시간 : %04d/%02d/%02d %02d:%02d:%02d" % (now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min, now.tm_sec))
@@ -278,6 +286,7 @@ try:
                 print("MES Server로 부터 작업지시 명령을 받았습니다.")
                 time1.sleep(1)
                 print("------------------------------------------")
+                print()
 
                 # 명령 보낼때마다 1씩 증가
                 SystemByteResult = SystemBytePlus()
@@ -289,8 +298,17 @@ try:
                 print("제품색상 : " + Color)
                 print()
 
+                print("==========================================")
+                print("5초뒤 Aria 공정이 작동됩니다.")
+                time1.sleep(1)
+                print("4초뒤 Aria 공정이 작동됩니다.")
+                time1.sleep(1)
                 print("3초뒤 Aria 공정이 작동됩니다.")
-                time1.sleep(3)
+                time1.sleep(1)
+                print("2초뒤 Aria 공정이 작동됩니다.")
+                time1.sleep(1)
+                print("1초뒤 Aria 공정이 작동됩니다.")
+                print("==========================================")
                 command_arduino(ser, 0)
                 break
             time1.sleep(2)  # 2초 딜레이

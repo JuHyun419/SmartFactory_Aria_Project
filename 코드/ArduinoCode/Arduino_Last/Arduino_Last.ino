@@ -248,13 +248,18 @@ void rack_forward()
 // 피니언 움직이는 함수(컨베이어 벨트쪽으로)
 void rack_backward()
 {
+  digitalWrite(IN3, 0);
+  digitalWrite(IN4, 1);
+  analogWrite(EN2, 32);
+  delay(4600);
+}
 void conveyer_dc_op()
 {
   digitalWrite(IN1, 0); // 12번
-  digitalWrite(IN3, 0); // 2번
-  digitalWrite(IN4, 1); // 4번
-  analogWrite(EN2, 35); // 11번
-  delay(4600);
+
+  // 컨베이어벨트 동작 함수(0, 1 = 정방향, 53 = 속도)
+  digitalWrite(IN2, 1); // 13번
+  analogWrite(EN1, 53); // 3번
 }
 
 // 피니언 정지 함수
@@ -265,10 +270,6 @@ void rack_stop()
   analogWrite(EN2, 0);
 }
 
-// 컨베이어벨트 동작 함수(0, 1 = 정방향, 53 = 속도)
-  digitalWrite(IN2, 1); // 13번
-  analogWrite(EN1, 51); // 3번
-}
 
 // 컨베이어벨트 정지 함수
 void conveyer_dc_st()
